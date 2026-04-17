@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MovieZone - Pure Details</title>
+    <style>
+        body {
+            background-color: #141414;
+            color: white;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 85vh;
+            background-size: cover;
+            background-position: center top;
+            transition: background 0.6s ease-in-out;
+            display: flex;
+            align-items: center;
+            padding: 0 50px;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to right, #141414 15%, transparent 85%),
+                        linear-gradient(to top, #141414 5%, transparent 40%);
+        }
+
+        .content { position: relative; z-index: 10; max-width: 850px; }
+        h1 { font-size: 75px; margin: 0; text-transform: uppercase; letter-spacing: -2px; }
+
+        .meta-info { margin: 25px 0; display: flex; gap: 20px; align-items: center; color: #a3a3a3; font-size: 18px; }
+        .match { color: #46d369; font-weight: bold; }
+        .badge { border: 1px solid #808080; padding: 2px 8px; font-size: 14px; border-radius: 3px; color: white; }
+
+        .description {
+            font-size: 22px;
+            line-height: 1.6;
+            margin-bottom: 35px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.9);
+            color: #ffffff;
+        }
+
+        .btn {
+            padding: 15px 45px;
+            font-size: 20px;
+            font-weight: bold;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 15px;
+            transition: 0.3s;
+        }
+        .btn-play { background-color: white; color: black; }
+        .btn-play:hover { background-color: #e6e6e6; }
+        .btn-list { background-color: rgba(109, 109, 110, 0.7); color: white; }
+        .btn-list.added { background-color: #46d369; color: white; }
+
+        /* Simplified Selection Grid */
+        .selection-shelf { padding: 40px 50px; background: #141414; }
+        .selection-shelf h2 { font-size: 24px; color: #e5e5e5; margin-bottom: 20px; }
+        
+        .grid-layout {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 20px; /* زيادة المسافة قليلاً للترتيب */
+        }
+
+        .movie-card { 
+            cursor: pointer; 
+            transition: transform 0.3s; 
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .movie-card:hover { transform: scale(1.08); }
+
+        /* التعديل الجوهري هنا لتوحيد حجم الصور */
+        .movie-card img { 
+            width: 100%; 
+            aspect-ratio: 2 / 3; /* يحدد نسبة عرض إلى طول ثابتة (مثل بوسترات الأفلام) */
+            object-fit: cover; /* يضمن تعبئة الصورة للمساحة دون تمطيط */
+            border-radius: 6px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5); 
+        }
+
+        /* My List Gallery Section */
+        .my-list-gallery { padding: 40px 50px; border-top: 1px solid #333; display: none; }
+        .my-list-gallery.active { display: block; }
+    </style>
+</head>
+<body>
+
+    <header id="hero" class="hero" style="background-image: url('Images/Inception.webp');">
+        <div class="hero-overlay"></div>
+        <div class="content">
+            <h1 id="mainTitle">Inception</h1>
+            <div class="meta-info">
+                <span id="mainMatch" class="match">98% Match</span>
+                <span id="mainYear">2010</span>
+                <span class="badge">13+</span>
+                <span id="mainDuration">2h 28m</span>
+                <span class="badge">Ultra HD 4K</span>
+            </div>
+            <p id="mainDesc" class="description">
+                Dom Cobb is a skilled thief, the absolute best in the dangerous art of extraction, stealing valuable secrets from deep within the subconscious during the dream state, when the mind is at its most vulnerable. Dom’s rare ability has made him a coveted player in this treacherous new world of corporate espionage, but it has also made him an international fugitive that cost him everything he has ever loved.
+            </p>
+            <div class="action-btns">
+                <button class="btn btn-play">▶ Play</button>
+                <button id="listBtn" class="btn btn-list" onclick="toggleMyList()">+ My List</button>
+            </div>
+        </div>
+    </header>
+
+    <section class="selection-shelf">
+        <h2>Select a Movie to View Details</h2>
+        <div class="grid-layout">
+            <div class="movie-card" onclick="changeMovie('Inception', '2010', '2h 28m', '98% Match', 'Dom Cobb is a skilled thief, the absolute best in the dangerous art of extraction, stealing valuable secrets from deep within the subconscious during the dream state, when the mind is at its most vulnerable. Dom’s rare ability has made him a coveted player in this treacherous new world of corporate espionage.', 'Images/Inception.webp')">
+                <img src="Images/Inception.webp" alt="Inception">
+            </div>
+            <div class="movie-card" onclick="changeMovie('Interstellar', '2014', '2h 49m', '95% Match', 'With our time on Earth coming to an end, a team of explorers undertakes the most important mission in human history; traveling beyond this galaxy to discover whether mankind has a future among the stars. Cooper, a widowed ex-pilot, must leave his children behind to lead an expedition through a newly discovered wormhole.', 'Images/Interstellar.webp')">
+                <img src="Images/Interstellar.webp" alt="Interstellar">
+            </div>
+            <div class="movie-card" onclick="changeMovie('Joker', '2019', '2h 2m', '92% Match', 'Arthur Fleck is a man struggling to find his way in Gotham\'s fractured society. A clown-for-hire by day, he aspires to be a stand-up comic at night...but finds the joke always seems to be on him. Caught in a cyclical existence between apathy and cruelty, Arthur makes one bad decision that brings about a chain reaction of escalating events.', 'Images/Joker.jpg')">
+                <img src="Images/Joker.jpg" alt="Joker">
+            </div>
+            <div class="movie-card" onclick="changeMovie('Avengers', '2012', '2h 23m', '96% Match', 'When an unexpected enemy emerges and threatens global safety and security, Nick Fury, director of the international peacekeeping agency known as S.H.I.E.L.D., finds himself in need of a team to pull the world back from the brink of disaster. Spanning the globe, a daring recruitment effort begins for Earth\'s mightiest heroes.', 'Images/Avengers.webp')">
+                <img src="Images/Avengers.webp" alt="Avengers">
+            </div>
+            <div class="movie-card" onclick="changeMovie('Titanic', '1997', '3h 14m', '89% Match', '84 years later, a 100-year-old woman named Rose DeWitt Bukater tells the story to her granddaughter Lizzy Calvert and Brock Lovett about her life set in April 10th 1912, on a ship called Titanic when young Rose boards the departing ship with the upper-class passengers and her mother and her fiancé.', 'Images/Titanic.webp')">
+                <img src="Images/Titanic.webp" alt="Titanic">
+            </div>
+            <div class="movie-card" onclick="changeMovie('Frozen', '2013', '1h 42m', '85% Match', 'When the newly crowned Queen Elsa accidentally uses her power to turn things into ice to curse her home in infinite winter, her sister Anna teams up with a mountain man, his playful reindeer, and a hopeless snowman to change the weather condition and save the kingdom from destruction.', 'Images/Frozen.webp')">
+                <img src="Images/Frozen.webp" alt="Frozen">
+            </div>
+        </div>
+    </section>
+
+    <section id="myListSection" class="my-list-gallery">
+        <h2 style="color: #E50914;">My Saved Movies</h2>
+        <div id="myListGrid" class="grid-layout">
+        </div>
+    </section>
+
+    <script>
+        let mySavedList = JSON.parse(localStorage.getItem('myFinalList')) || [];
+        let currentActive = { title: 'Inception', img: 'Images/Inception.webp' };
+
+        function changeMovie(title, year, dur, match, desc, img) {
+            currentActive = { title, img };
+            document.getElementById('mainTitle').innerText = title;
+            document.getElementById('mainYear').innerText = year;
+            document.getElementById('mainDuration').innerText = dur;
+            document.getElementById('mainMatch').innerText = match;
+            document.getElementById('mainDesc').innerText = desc;
+            document.getElementById('hero').style.backgroundImage = `url('${img}')`;
+            
+            updateBtn();
+        }
+
+        function toggleMyList() {
+            const idx = mySavedList.findIndex(m => m.title === currentActive.title);
+            if (idx === -1) {
+                mySavedList.push(currentActive);
+            } else {
+                mySavedList.splice(idx, 1);
+            }
+            localStorage.setItem('myFinalList', JSON.stringify(mySavedList));
+            updateBtn();
+            renderGallery();
+        }
+
+        function updateBtn() {
+            const btn = document.getElementById('listBtn');
+            const exists = mySavedList.some(m => m.title === currentActive.title);
+            if (exists) {
+                btn.innerText = "✓ In My List";
+                btn.classList.add('added');
+            } else {
+                btn.innerText = "+ My List";
+                btn.classList.remove('added');
+            }
+        }
+
+        function renderGallery() {
+            const section = document.getElementById('myListSection');
+            const grid = document.getElementById('myListGrid');
+            
+            if (mySavedList.length > 0) {
+                section.classList.add('active');
+                grid.innerHTML = mySavedList.map(m => `
+                    <div class="movie-card">
+                        <img src="${m.img}" alt="${m.title}">
+                        <p style="text-align:center; margin-top:10px; font-size:14px;">${m.title}</p>
+                    </div>
+                `).join('');
+            } else {
+                section.classList.remove('active');
+            }
+        }
+
+        window.onload = () => {
+            renderGallery();
+            updateBtn();
+        };
+    </script>
+</body>
+</html>
