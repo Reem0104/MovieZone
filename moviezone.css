@@ -122,7 +122,7 @@ input, select {
 }
 
 .navbar__links {
-  display: flex;
+  display: flex !important ;
   gap: 1.5rem;
   align-items: center;
 }
