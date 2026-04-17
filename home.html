@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MovieZone — Home</title>
+  <link rel="stylesheet" href="moviezone.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="mainNav">
+  <div class="navbar__logo">Movie<span>Zone</span></div>
+
+  <div class="navbar__links">
+    <a href="index.html" class="active">Home</a>
+    <a href="details.html">Movies</a>
+    <a href="search.html">Search</a>
+    <a href="categories.html">Categories</a>
+    <a href="profile.html">My List</a>
+  </div>
+
+  <div class="navbar__right">
+    <button class="navbar__search-btn">🔍</button>
+    <button class="navbar__bell-btn">🔔</button>
+    <div class="navbar__avatar" id="avatarBtn">MZ</div>
+  </div>
+
+  <div class="navbar__dropdown" id="navDropdown">
+    <a href="profile.html">👤 Profile</a>
+    <a href="#">⚙️ Settings</a>
+    <hr>
+    <a href="#">Sign Out</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="trending-bomb" id="trendingHero">
+  <div class="trending-bomb__bg" id="heroBg"></div>
+  <div class="trending-bomb__overlay"></div>
+
+  <div class="trending-ticker">
+    <div class="trending-ticker__inner">
+      <span>🔥 Trending Now</span>
+      <span>● Now Streaming</span>
+      <span>🔥 Top Picks</span>
+      <span>● Must Watch</span>
+    </div>
+  </div>
+
+  <div class="bomb-badge">
+    <span>💣</span>
+    <span>الأكثر تداولاً الآن</span>
+  </div>
+
+  <div class="top10-strip" id="top10Strip"></div>
+
+  <div class="trending-bomb__content">
+    <div class="trending-bomb__rank">#1 Trending This Week</div>
+    <h1 class="trending-bomb__title" id="heroTitle">AVENGERS</h1>
+
+    <div class="trending-bomb__meta">
+      <span id="heroMatch">97% Match</span>
+      <span id="heroYear">2012</span>
+      <span>·</span>
+      <span id="heroDuration">2h 23m</span>
+      <span id="heroScore">🔥 HOT</span>
+    </div>
+
+    <div class="trending-bomb__genres" id="heroGenres"></div>
+
+    <p class="trending-bomb__desc" id="heroDesc">
+      Earth's mightiest heroes must come together and learn to fight as a team.
+    </p>
+
+    <div class="trending-bomb__actions">
+      <button class="btn btn--primary">▶ Play Now</button>
+      <button class="btn btn--secondary">ℹ More Info</button>
+      <button class="btn btn--icon" id="heroFavBtn">＋</button>
+    </div>
+  </div>
+</section>
+
+<!-- TRENDING ROW -->
+<div class="trending-row">
+  <p>💣 Trending Bomb — Switch Movie</p>
+  <div class="trending-row__list" id="trendingPills"></div>
+</div>
+
+<!-- MAIN -->
+<main class="main-content">
+
+  <div class="genre-filters">
+    <span class="genre-tag active">All</span>
+    <span class="genre-tag">Action</span>
+    <span class="genre-tag">Sci-Fi</span>
+    <span class="genre-tag">Drama</span>
+  </div>
+
+  <section class="content-section">
+    <h2>Top 10 This Week</h2>
+    <div class="slider-track" id="row1Track"></div>
+  </section>
+
+  <section class="content-section">
+    <h2>Continue Watching</h2>
+    <div class="slider-track" id="row2Track"></div>
+  </section>
+
+  <section class="content-section">
+    <h2>Action & Adventure</h2>
+    <div class="slider-track" id="row3Track"></div>
+  </section>
+
+  <section class="content-section">
+    <h2>Award Winners</h2>
+    <div class="slider-track" id="row4Track"></div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer__logo">Movie<span>Zone</span></div>
+  <p>© 2025 MovieZone</p>
+</footer>
+
+<!-- ربط الجافاسكربت الخارجي فقط -->
+<script src="moviezone.js"></script>
+
+</body>
+</html>
