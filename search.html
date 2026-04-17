@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MovieZone - Search</title>
+
+  <!-- Link to the main CSS file -->
+  <link rel="stylesheet" href="moviezone.css">
+</head>
+
+<body>
+
+<!-- =========================================
+     NAVIGATION BAR
+     This section contains the website navigation
+========================================= -->
+<nav class="navbar">
+
+  <!-- Website logo -->
+  <div class="navbar__logo">
+    Movie<span>Zone</span>
+  </div>
+
+  <!-- Navigation links to other pages -->
+  <div class="navbar__links">
+    <a href="index.html">Home</a>
+    <a href="details.html">Details</a>
+    <a href="login.html">Login</a>
+    <a href="profile.html">Profile</a>
+    <a href="search.html" class="active">Search</a>
+    <a href="categories.html">Categories</a>
+  </div>
+
+  <!-- Right side: search button and user avatar -->
+  <div class="navbar__right">
+    <button class="navbar__search-btn">Search</button>
+    <div class="navbar__avatar">R</div>
+  </div>
+
+</nav>
+
+
+<!-- =========================================
+     SEARCH SECTION
+     This section displays the search bar and results
+========================================= -->
+<div class="search-overlay open">
+
+  <!-- Search input field -->
+  <div class="search-bar">
+    <input 
+      type="text" 
+      class="search-bar__input"
+      placeholder="Search for movies..."
+    >
+  </div>
+
+  <!-- Search results will appear here dynamically -->
+  <div class="search-results"></div>
+
+</div>
+
+
+<!-- =========================================
+     JAVASCRIPT FILE
+     This connects the page to the main JS file
+========================================= -->
+<script src="moviezone.js"></script>
+
+</body>
+</html>
