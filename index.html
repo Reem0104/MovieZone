@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MovieZone — Watch Movies &amp; Shows</title>
+  <link rel="stylesheet" href="moviezone.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+
+  <!-- ============================================================
+       NAVBAR
+  ============================================================ -->
+  <nav class="navbar" id="navbar">
+    <a href="index.html" class="navbar__logo">MOVIE<span>ZONE</span></a>
+
+    <!-- .navbar__links must be div — CSS targets div.navbar__links -->
+    <div class="navbar__links">
+      <a href="index.html" class="active">Home</a>
+      <a href="#">Movies</a>
+      <a href="#">TV Shows</a>
+      <a href="#">New &amp; Popular</a>
+      <a href="#">My List</a>
+    </div>
+
+    <div class="navbar__right">
+      <button class="navbar__search-btn" id="searchToggle" aria-label="Search">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+      <button class="navbar__bell-btn" aria-label="Notifications">
+        <i class="fa-solid fa-bell"></i>
+      </button>
+      <div class="navbar__avatar" id="avatarBtn">MZ</div>
+    </div>
+
+    <!-- Dropdown inside nav for correct absolute positioning -->
+    <div class="navbar__dropdown" id="dropdown">
+      <a href="#"><i class="fa-solid fa-user fa-fw" style="margin-right:8px;"></i>Profile</a>
+      <a href="#"><i class="fa-solid fa-list fa-fw" style="margin-right:8px;"></i>My List</a>
+      <a href="#"><i class="fa-solid fa-gear fa-fw" style="margin-right:8px;"></i>Settings</a>
+      <hr />
+      <a href="#"><i class="fa-solid fa-right-from-bracket fa-fw" style="margin-right:8px;"></i>Sign Out</a>
+    </div>
+  </nav>
+
+  <!-- ============================================================
+       SEARCH OVERLAY
+  ============================================================ -->
+  <div class="search-overlay" id="searchOverlay">
+    <div class="search-bar">
+      <span class="search-bar__icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+      <input class="search-bar__input" type="text"
+             placeholder="Search movies, shows, genres…" autocomplete="off" />
+      <button style="background:transparent;color:var(--text-muted);font-size:1.1rem;" id="searchClose">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    <div class="search-results" id="searchResults"></div>
+  </div>
+
+  <!-- ============================================================
+       HERO BANNER
+  ============================================================ -->
+  <section class="hero">
+    <div class="hero__backdrop"
+         style="background-image:url('https://cdn.al-ain.com/lg/images/2025/7/20/205-094545-437490.jpg-2-.jpg');
+                background-position:center center;">
+    </div>
+    <div class="hero__overlay"></div>
+    <div class="hero__content">
+      <span class="hero__badge">&#9654; Now Showing</span>
+      <h1 class="hero__title">Siwar</h1>
+      <div class="hero__meta">
+        <span class="hero__rating">96% Match</span>
+        <span class="hero__year">2025</span>
+        <span class="hero__duration">1h 55m</span>
+      </div>
+      <div class="hero__genres">
+        <span class="hero__genre-tag">Drama</span>
+        <span class="hero__genre-tag">Family</span>
+        <span class="hero__genre-tag">Saudi</span>
+      </div>
+      <p class="hero__description">
+        "Siwar" is a Saudi drama inspired by true events from 2003 in Najran. Two newborns —
+        one Saudi, one Turkish — are accidentally switched in a hospital, exploring identity
+        and belonging across two families in distinct cultural environments. Directed by Osama Al-Khuraiji.
+      </p>
+      <div class="hero__buttons">
+        <button class="btn btn--primary" id="heroPlayBtn">
+          <i class="fa-solid fa-play"></i> Play
+        </button>
+        <button class="btn btn--secondary" id="moreInfoBtn">
+          <i class="fa-solid fa-circle-info"></i> More Info
+        </button>
+        <button class="btn btn--icon" id="heroAddBtn" aria-label="Add to My List">
+          <i class="fa-solid fa-plus"></i>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       MAIN CONTENT — rows injected by JS below
+  ============================================================ -->
+  <main id="mainContent"></main>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="footer">
+    <div class="footer__top">
+      <div>
+        <div class="footer__logo">MOVIE<span>ZONE</span></div>
+        <p style="font-size:0.82rem;color:var(--text-muted);margin-top:0.6rem;max-width:220px;line-height:1.55;">
+          Your ultimate destination for movies and TV shows.
+        </p>
+      </div>
+      <div class="footer__columns">
+        <div class="footer__col">
+          <p class="footer__col-title">Browse</p>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#">Movies</a></li>
+            <li><a href="#">TV Shows</a></li>
+            <li><a href="#">New &amp; Popular</a></li>
+            <li><a href="#">My List</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <p class="footer__col-title">Genres</p>
+          <ul>
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Drama</a></li>
+            <li><a href="#">Sci-Fi</a></li>
+            <li><a href="#">Animation</a></li>
+            <li><a href="#">Romance</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <p class="footer__col-title">Support</p>
+          <ul>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Account</a></li>
+            <li><a href="#">Privacy</a></li>
+            <li><a href="#">Terms</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p class="footer__copy">&copy; 2026 MovieZone. All rights reserved — YARSHA</p>
+      <select class="footer__lang-select">
+        <option value="en">🌐 English</option>
+      </select>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       MODAL
+  ============================================================ -->
+  <div class="modal-backdrop" id="modalBackdrop">
+    <div class="modal" id="modal">
+      <div class="modal__video-area">
+        <img class="modal__backdrop-img" id="modalImg" src="" alt="" />
+        <div class="modal__video-overlay"></div>
+        <button class="modal__close-btn" id="modalClose">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="modal__video-controls">
+          <button class="btn btn--primary" style="padding:0.55rem 1.4rem;" id="modalPlayBtn">
+            <i class="fa-solid fa-play"></i> Play
+          </button>
+          <button class="btn btn--secondary" style="padding:0.55rem 1rem;" id="modalAddBtn">
+            <i class="fa-solid fa-plus"></i>
+          </button>
+          <button class="btn btn--secondary" style="padding:0.55rem 1rem;">
+            <i class="fa-regular fa-thumbs-up"></i>
+          </button>
+        </div>
+      </div>
+      <div class="modal__body">
+        <h2 class="modal__title"  id="modalTitle"></h2>
+        <div class="modal__meta">
+          <span class="modal__match" id="modalMatch"></span>
+          <span class="modal__year"  id="modalYear"></span>
+          <span class="modal__hd">HD</span>
+        </div>
+        <p class="modal__description" id="modalDesc"></p>
+        <div class="modal__details">
+          <span class="modal__detail-label">Duration:</span>
+          <span class="modal__detail-value" id="modalDuration"></span>
+          <span class="modal__detail-label">Genres:</span>
+          <span class="modal__detail-value" id="modalGenres"></span>
+          <span class="modal__detail-label">Director:</span>
+          <span class="modal__detail-value" id="modalDirector"></span>
+          <span class="modal__detail-label">Language:</span>
+          <span class="modal__detail-value" id="modalLang"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       TOAST CONTAINER
+  ============================================================ -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- moviezone.js must load first — provides initNavbar() -->
+  <script src="moviezone.js"></script>
+  <script>
+    'use strict';
+
+    /* ──────────────────────────────────────────────
+       MOVIE DATABASE
+    ────────────────────────────────────────────── */
+    const allMovies = [
+      // Arabic / Saudi
+      { id:"ar1", title:"Shabab Al Bomb",              thumb:"https://assets.voxcinemas.com/posters/P_HO00011012.jpg",                                       genres:["Comedy","Family"],       year:"2026", duration:"1h 55m", match:"96%", desc:"A group of young men find themselves facing a gang of forty. Amer's courage and innovative ideas turn enemies into heroes.",                                                                                              director:"حمد الحارثي",       lang:"Arabic"  },
+      { id:"m8",  title:"Siwar",                        thumb:"https://cdn.al-ain.com/lg/images/2025/7/20/205-094545-437490.jpg-2-.jpg",                      genres:["Drama","Family"],        year:"2025", duration:"2h 0m",  match:"94%", desc:"A Saudi drama inspired by true 2003 events. Two newborns — one Saudi, one Turkish — switched in a Najran hospital. Explores identity and belonging across two families in distinct cultural environments.",  director:"Osama Al-Khuraiji", lang:"Arabic"  },
+      { id:"ar3", title:"Mandoob",                      thumb:"https://i.ytimg.com/vi/kbfEXH6T4vA/maxresdefault.jpg",                                         genres:["Drama","Thriller"],      year:"2023", duration:"2h 2m",  match:"91%", desc:"A delivery driver is pulled into an underworld of secrets and moral dilemmas in Riyadh.",                                                                                                                        director:"Ali Kalthami",      lang:"Arabic"  },
+      { id:"ar2", title:"Norah",                        thumb:"https://tse1.mm.bing.net/th/id/OIP.-9ilX7RuwAkUZQdby9I0iAHaK7?rs=1&pid=ImgDetMain&o=7&rm=3", genres:["Drama"],                 year:"2023", duration:"1h 42m", match:"93%", desc:"A Saudi girl seeks freedom and self-expression in 1990s rural Saudi Arabia.",                                                                                                                          director:"Tawfik Alzaidi",    lang:"Arabic"  },
+      // International
+      { id:"m1",  title:"Dune: Part Two",               thumb:"https://image.tmdb.org/t/p/w500/1pdfLvkbY9ohJlCjQH2CZjjYVvJ.jpg",                             genres:["Sci-Fi","Adventure"],    year:"2024", duration:"2h 46m", match:"97%", desc:"Paul Atreides unites with the Fremen to seek revenge against the conspirators who destroyed his family.",                                                                                           director:"Denis Villeneuve",  lang:"English" },
+      { id:"m2",  title:"Oppenheimer",                  thumb:"https://image.tmdb.org/t/p/w500/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg",                             genres:["Drama","History"],       year:"2023", duration:"3h 0m",  match:"98%", desc:"The story of J. Robert Oppenheimer and his role in the development of the atomic bomb during World War II.",                                                                                         director:"Christopher Nolan", lang:"English" },
+      { id:"m3",  title:"Deadpool & Wolverine",         thumb:"https://image.tmdb.org/t/p/w500/8cdWjvZQUExUUTzyp4t6EDMubfO.jpg",                             genres:["Action","Comedy"],       year:"2024", duration:"2h 8m",  match:"95%", desc:"Deadpool is recruited by the TVA and forced to team up with an unlikely Wolverine.",                                                                                                              director:"Shawn Levy",        lang:"English" },
+      { id:"m4",  title:"Gladiator II",                 thumb:"https://image.tmdb.org/t/p/w500/2cxhvwyEwRlysAmRH4iodkvo0z5.jpg",                             genres:["Action","Drama"],        year:"2024", duration:"2h 28m", match:"93%", desc:"Years after witnessing the death of Maximus, Lucius must enter the Colosseum to fight for Rome's future.",                                                                                     director:"Ridley Scott",      lang:"English" },
+      { id:"m5",  title:"Alien: Romulus",               thumb:"https://image.tmdb.org/t/p/w500/b33nnKl1GSFbao4l3fZDDqsMx0F.jpg",                             genres:["Horror","Sci-Fi"],       year:"2024", duration:"1h 59m", match:"91%", desc:"Young colonizers face the most terrifying life form in the universe aboard an abandoned space station.",                                                                                       director:"Fede Álvarez",      lang:"English" },
+      { id:"m6",  title:"Inside Out 2",                 thumb:"https://image.tmdb.org/t/p/w500/vpnVM9B6NMmQpWeZvzLvDESb2QY.jpg",                             genres:["Animation","Family"],    year:"2024", duration:"1h 40m", match:"96%", desc:"Riley enters high school and a new emotion — Anxiety — crashes Headquarters.",                                                                                                               director:"Kelsey Mann",       lang:"English" },
+      { id:"m7",  title:"Planet of the Apes",           thumb:"https://image.tmdb.org/t/p/w500/gKkl37BQuKTanygYQG1pyYgLVgf.jpg",                             genres:["Sci-Fi","Action"],       year:"2024", duration:"2h 25m", match:"92%", desc:"A new tyrannical ape leader builds an empire as a young human rises to challenge him.",                                                                                                      director:"Wes Ball",          lang:"English" },
+      { id:"m9",  title:"The Substance",                thumb:"https://image.tmdb.org/t/p/w500/lqoMzCcZYEFK729d6qzt349fB4o.jpg",                             genres:["Horror","Drama"],        year:"2024", duration:"2h 20m", match:"90%", desc:"A fading celebrity uses a mysterious drug creating a younger version of herself — with horrifying consequences.",                                                                          director:"Coralie Fargeat",   lang:"English" },
+      { id:"m11", title:"Nosferatu",                    thumb:"https://image.tmdb.org/t/p/w500/5qGIxdEO841C0tdY8vOdLoRVrr0.jpg",                             genres:["Horror","Gothic"],       year:"2024", duration:"2h 12m", match:"91%", desc:"A gothic tale of obsession between a haunted young woman and a terrifying ancient vampire who stalks her soul.",                                                                         director:"Robert Eggers",     lang:"English" },
+      { id:"m12", title:"Inception",                    thumb:"https://image.tmdb.org/t/p/w500/oYuLEt3zVCKq57qu2F8dT7NIa6f.jpg",                             genres:["Action","Sci-Fi"],       year:"2010", duration:"2h 28m", match:"95%", desc:"A thief who steals corporate secrets through dream-sharing technology is given the impossible task of planting an idea.",                                                                   director:"Christopher Nolan", lang:"English" },
+      { id:"m13", title:"Interstellar",                 thumb:"https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg",                             genres:["Sci-Fi","Drama"],        year:"2014", duration:"2h 49m", match:"97%", desc:"A team of explorers travel through a wormhole to ensure humanity's survival beyond our galaxy.",                                                                                       director:"Christopher Nolan", lang:"English" },
+      { id:"m14", title:"The Dark Knight",              thumb:"https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg",                             genres:["Action","Crime"],        year:"2008", duration:"2h 32m", match:"99%", desc:"Batman faces the Joker, a criminal mastermind who plunges Gotham City into devastating anarchy and chaos.",                                                                           director:"Christopher Nolan", lang:"English" },
+      { id:"m15", title:"Avengers: Endgame",            thumb:"https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg",                             genres:["Action","Adventure"],    year:"2019", duration:"3h 2m",  match:"96%", desc:"After the devastating events of Infinity War, the Avengers assemble for one final stand against Thanos.",                                                                               director:"Russo Brothers",    lang:"English" },
+      { id:"m16", title:"Joker",                        thumb:"https://image.tmdb.org/t/p/w500/udDclJoHjfjb8Ekgsd4FDteOkCU.jpg",                             genres:["Drama","Crime"],         year:"2019", duration:"2h 2m",  match:"91%", desc:"In Gotham City, a mentally troubled comedian embarks on a downward spiral that leads to a social revolution.",                                                                       director:"Todd Phillips",     lang:"English" },
+      { id:"m17", title:"The Wild Robot",               thumb:"https://image.tmdb.org/t/p/w500/wTnV3PCVW5O92JMrFvvrRcV39RU.jpg",                             genres:["Animation","Family"],    year:"2024", duration:"1h 41m", match:"97%", desc:"A robot stranded on a wild island must adapt to nature and care for an orphaned gosling to survive.",                                                                               director:"Chris Sanders",     lang:"English" },
+      { id:"m18", title:"Moana 2",                      thumb:"https://image.tmdb.org/t/p/w500/aLVkiINlIeCkcZIzb7XHzPYgO6L.jpg",                             genres:["Animation","Adventure"], year:"2024", duration:"1h 40m", match:"89%", desc:"Moana sets sail on a daring expedition to the far seas of Oceania and encounters new lands and ancient perils.",                                                                     director:"David Derrick Jr.", lang:"English" },
+      { id:"m19", title:"Kung Fu Panda 4",              thumb:"https://image.tmdb.org/t/p/w500/kDp1vUBnMpe8ak4rjgl3cLELqjU.jpg",                             genres:["Animation","Action"],    year:"2024", duration:"1h 34m", match:"88%", desc:"Po must train a new Dragon Warrior while facing a cunning shape-shifting villain threatening the Valley of Peace.",                                                                  director:"Mike Mitchell",     lang:"English" },
+      { id:"m20", title:"A Quiet Place: Day One",       thumb:"https://image.tmdb.org/t/p/w500/yrpPYKijwdMHyTGIOd1iK1h0Xno.jpg",                             genres:["Horror","Thriller"],     year:"2024", duration:"1h 39m", match:"90%", desc:"Experience the first terrifying hours of the alien invasion — the day the world went quiet.",                                                                                    director:"Michael Sarnoski",  lang:"English" },
+      { id:"m21", title:"Longlegs",                     thumb:"https://image.tmdb.org/t/p/w500/ljqXKkpJbVJQfFClkTxjFsV4EAD.jpg",                             genres:["Horror","Mystery"],      year:"2024", duration:"1h 41m", match:"87%", desc:"An FBI agent investigating a string of murders uncovers terrifying evidence of the occult tied to a serial killer.",                                                                 director:"Osgood Perkins",    lang:"English" },
+      { id:"m22", title:"Captain America: Brave New World", thumb:"https://image.tmdb.org/t/p/w500/pzIddUEMWhWzfvLI3TwxUG2wGoi.jpg",                        genres:["Action","Superhero"],    year:"2025", duration:"1h 58m", match:"87%", desc:"Sam Wilson's Captain America faces a global incident and a conspiracy threatening world peace.",                                                                                   director:"Julius Onah",       lang:"English" },
+      { id:"m23", title:"Thunderbolts*",                thumb:"https://image.tmdb.org/t/p/w500/m9EtP1SB2tNnMFQOL6pPBPLXOqL.jpg",                             genres:["Action","Superhero"],    year:"2025", duration:"2h 10m", match:"91%", desc:"A group of Marvel antiheroes are recruited for a dangerous mission with world-altering stakes.",                                                                                  director:"Jake Schreier",     lang:"English" },
+      { id:"m24", title:"Trap",                         thumb:"https://image.tmdb.org/t/p/w500/jlK6F4FYWEjrOSFWyHb4Qlj4dOh.jpg",                             genres:["Thriller","Mystery"],    year:"2024", duration:"1h 45m", match:"86%", desc:"A father discovers that a serial killer investigation is targeting the concert he's attending with his daughter.",                                                                    director:"M. Night Shyamalan",lang:"English" },
+      { id:"m25", title:"Wicked",                       thumb:"https://image.tmdb.org/t/p/w500/c5Tqxeo1UpBvnAc3csUm7j3hlQl.jpg",                             genres:["Musical","Fantasy"],     year:"2024", duration:"2h 40m", match:"93%", desc:"The untold story of the witches of Oz, long before Dorothy arrived — a powerful story of friendship and courage.",                                                                  director:"Jon M. Chu",        lang:"English" },
+      { id:"m26", title:"Twisters",                     thumb:"https://image.tmdb.org/t/p/w500/pjnD08FlMAIKIGnGSzKSlfPEMaA.jpg",                             genres:["Action","Adventure"],    year:"2024", duration:"2h 2m",  match:"89%", desc:"Storm chasers converge on the Oklahoma plains during the most extreme tornado season on record.",                                                                                     director:"Lee Isaac Chung",   lang:"English" },
+      { id:"m27", title:"Speak No Evil",                thumb:"https://image.tmdb.org/t/p/w500/aBpBpBgGBOCGkPFiAoMaZqrZrCm.jpg",                             genres:["Thriller","Drama"],      year:"2024", duration:"1h 50m", match:"88%", desc:"A family accepts a holiday invitation from strangers they met abroad, unaware of the horrors that await them.",                                                                     director:"James Watkins",     lang:"English" }
+    ];
+
+    /* Expose to moviezone.js search (search.html reads window.movies) */
+    window.movies = allMovies.map(m => ({
+      id: m.id, title: m.title, thumb: m.thumb,
+      genres: m.genres, year: m.year, duration: m.duration, match: m.match
+    }));
+
+    /* ──────────────────────────────────────────────
+       ROW DEFINITIONS
+    ────────────────────────────────────────────── */
+    const sections = [
+      { title:"Now Playing",           highlight:null,       ids:["ar1","m3","m4","m1","m22","m23"],                      ranked:false, progress:null         },
+      { title:"Top Picks",             highlight:"For You",  ids:["m2","m14","m13","m17","m25","m15"],                    ranked:false, progress:null         },
+      { title:"Top",                   highlight:"10",       ids:["m2","m3","m4","m1","m17","m18","m8","m11","m9","m16"], ranked:true,  progress:null         },
+      { title:"Arabic & Saudi Cinema", highlight:null,       ids:["ar1","ar2","ar3","m8","m16","m14"],                    ranked:false, progress:null         },
+      { title:"Animation & Family",    highlight:null,       ids:["m17","m18","m19","m6","m12","m13"],                    ranked:false, progress:null         },
+      { title:"Horror & Thriller",     highlight:null,       ids:["m20","m21","m9","m11","m24","m27"],                    ranked:false, progress:null         },
+      { title:"Action Blockbusters",   highlight:null,       ids:["m14","m15","m12","m7","m5","m26"],                     ranked:false, progress:null         },
+      { title:"Continue Watching",     highlight:null,       ids:["m14","m13","m2","m16","ar1","m3"],                     ranked:false, progress:[72,45,88,30,60,15] }
+    ];
+
+    /* ──────────────────────────────────────────────
+       BUILD CARD — CSS classes match moviezone.css
+    ────────────────────────────────────────────── */
+    function buildCard(movie, rank, progress) {
+      const rankHTML     = rank != null
+        ? `<span class="card__rank">${rank}</span>`
+        : '';
+      const progressHTML = progress != null
+        ? `<div class="card__progress"><div class="card__progress-fill" style="width:${progress}%"></div></div>`
+        : '';
+      return `
+        <div class="card${rank != null ? ' card--ranked' : ''}" data-id="${movie.id}">
+          ${rankHTML}
+          <img class="card__thumb" src="${movie.thumb}" alt="${movie.title}" loading="lazy"
+               onerror="this.src='Images/Inception.webp'">
+          <div class="card__overlay"></div>
+          <div class="card__info">
+            <div class="card__actions">
+              <button class="card__action-btn card__action-btn--play" title="Play">
+                <i class="fa-solid fa-play"></i>
+              </button>
+              <button class="card__action-btn watchlist-btn" title="Add to My List">
+                <i class="fa-solid fa-plus"></i>
+              </button>
+              <button class="card__action-btn" title="Like">
+                <i class="fa-regular fa-thumbs-up"></i>
+              </button>
+              <button class="card__action-btn card__action-btn--add info-btn" data-id="${movie.id}" title="More info">
+                <i class="fa-solid fa-chevron-down"></i>
+              </button>
+            </div>
+            <p class="card__title">${movie.title}</p>
+            <div class="card__meta-row">
+              <span class="card__match">${movie.match} Match</span>
+              <span class="card__duration">${movie.duration}</span>
+            </div>
+            <p class="card__genres">${movie.genres.join(' · ')}</p>
+          </div>
+          ${progressHTML}
+        </div>`;
+    }
+
+    /* ──────────────────────────────────────────────
+       RENDER ALL ROWS
+    ────────────────────────────────────────────── */
+    const mainEl = document.getElementById('mainContent');
+
+    sections.forEach(sec => {
+      const list = sec.ids.map(id => allMovies.find(m => m.id === id)).filter(Boolean);
+
+      const titleHTML = sec.highlight
+        ? `${sec.title} <span class="section-title--red">${sec.highlight}</span>`
+        : sec.title;
+
+      const cards = list.map((m, i) =>
+        buildCard(m, sec.ranked ? i + 1 : null, sec.progress ? (sec.progress[i] ?? null) : null)
+      ).join('');
+
+      const section = document.createElement('section');
+      section.className = 'content-section';
+      section.innerHTML = `
+        <div class="section-header">
+          <h2 class="section-title">${titleHTML}</h2>
+          <a href="#" class="section-see-all">See All</a>
+        </div>
+        <div class="slider-wrapper">
+          <button class="slider-btn slider-btn--left" aria-label="Scroll left">&#8249;</button>
+          <div class="slider-track"></div>
+          <button class="slider-btn slider-btn--right" aria-label="Scroll right">&#8250;</button>
+        </div>`;
+
+      /* inject cards safely (avoids innerHTML XSS and parsing issues) */
+      section.querySelector('.slider-track').innerHTML = cards;
+      mainEl.appendChild(section);
+    });
+
+    /* ──────────────────────────────────────────────
+       SLIDER — native scroll approach
+    ────────────────────────────────────────────── */
+    document.querySelectorAll('.slider-wrapper').forEach(wrapper => {
+      const track = wrapper.querySelector('.slider-track');
+      track.style.cssText += 'overflow-x:auto;scroll-behavior:smooth;scrollbar-width:none;-ms-overflow-style:none;';
+
+      const amt = () => wrapper.offsetWidth * 0.75;
+      wrapper.querySelector('.slider-btn--right')
+        .addEventListener('click', () => track.scrollBy({ left:  amt(), behavior:'smooth' }));
+      wrapper.querySelector('.slider-btn--left')
+        .addEventListener('click', () => track.scrollBy({ left: -amt(), behavior:'smooth' }));
+    });
+
+    /* ──────────────────────────────────────────────
+       SEARCH OVERLAY
+    ────────────────────────────────────────────── */
+    const searchOverlay = document.getElementById('searchOverlay');
+    const searchInput   = searchOverlay.querySelector('.search-bar__input');
+    const searchResults = document.getElementById('searchResults');
+
+    document.getElementById('searchToggle').addEventListener('click', () => {
+      searchOverlay.classList.add('open');
+      searchInput.focus();
+    });
+    document.getElementById('searchClose').addEventListener('click', () => {
+      searchOverlay.classList.remove('open');
+      searchInput.value = '';
+      searchResults.innerHTML = '';
+    });
+    searchOverlay.addEventListener('click', e => {
+      if (e.target === searchOverlay) {
+        searchOverlay.classList.remove('open');
+        searchInput.value = '';
+        searchResults.innerHTML = '';
+      }
+    });
+
+    searchInput.addEventListener('input', function () {
+      const q = this.value.toLowerCase().trim();
+      if (!q) { searchResults.innerHTML = ''; return; }
+
+      const hits = allMovies.filter(m =>
+        m.title.toLowerCase().includes(q) ||
+        m.genres.some(g => g.toLowerCase().includes(q))
+      );
+
+      if (!hits.length) {
+        searchResults.innerHTML = `<p class="search-results__title">No results for "${q}"</p>`;
+        return;
+      }
+
+      const cards = hits.map(m => `
+        <div class="card" data-id="${m.id}" style="flex:0 0 160px;cursor:pointer;">
+          <img class="card__thumb" src="${m.thumb}" alt="${m.title}" loading="lazy"
+               onerror="this.src='Images/Inception.webp'">
+          <div class="card__overlay"></div>
+          <div class="card__info">
+            <p class="card__title">${m.title}</p>
+            <div class="card__meta-row">
+              <span class="card__match">${m.match} Match</span>
+            </div>
+            <p class="card__genres">${m.genres.join(' · ')}</p>
+          </div>
+        </div>`).join('');
+
+      searchResults.innerHTML = `
+        <p class="search-results__title">Results for "${q}"</p>
+        <div class="slider-track" style="flex-wrap:wrap;gap:8px;">${cards}</div>`;
+    });
+
+    /* ──────────────────────────────────────────────
+       AVATAR DROPDOWN
+    ────────────────────────────────────────────── */
+    document.getElementById('avatarBtn').addEventListener('click', e => {
+      e.stopPropagation();
+      document.getElementById('dropdown').classList.toggle('open');
+    });
+    document.addEventListener('click', () =>
+      document.getElementById('dropdown').classList.remove('open'));
+
+    /* ──────────────────────────────────────────────
+       MODAL
+    ────────────────────────────────────────────── */
+    let currentModalId = null;
+
+    function openModal(id) {
+      const m = allMovies.find(x => x.id === id);
+      if (!m) return;
+      currentModalId = id;
+
+      document.getElementById('modalImg').src              = m.thumb;
+      document.getElementById('modalImg').alt              = m.title;
+      document.getElementById('modalTitle').textContent    = m.title;
+      document.getElementById('modalMatch').textContent    = m.match + ' Match';
+      document.getElementById('modalYear').textContent     = m.year;
+      document.getElementById('modalDuration').textContent = m.duration;
+      document.getElementById('modalGenres').textContent   = m.genres.join(', ');
+      document.getElementById('modalDesc').textContent     = m.desc || '';
+      document.getElementById('modalDirector').textContent = m.director || '—';
+      document.getElementById('modalLang').textContent     = m.lang || '—';
+
+      document.getElementById('modalBackdrop').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      document.getElementById('modalBackdrop').classList.remove('open');
+      document.body.style.overflow = '';
+      currentModalId = null;
+    }
+
+    document.getElementById('modalClose').addEventListener('click', closeModal);
+    document.getElementById('modalBackdrop').addEventListener('click', e => {
+      if (e.target.id === 'modalBackdrop') closeModal();
+    });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+    document.getElementById('modalPlayBtn').addEventListener('click', () => {
+      const m = allMovies.find(x => x.id === currentModalId);
+      if (m) showToast(`Playing "${m.title}"…`, 'info');
+    });
+
+    document.getElementById('modalAddBtn').addEventListener('click', function () {
+      const m    = allMovies.find(x => x.id === currentModalId);
+      const icon = this.querySelector('i');
+      if (icon.classList.contains('fa-plus')) {
+        icon.classList.replace('fa-plus', 'fa-check');
+        if (m) showToast(`"${m.title}" added to My List`, 'success');
+      } else {
+        icon.classList.replace('fa-check', 'fa-plus');
+      }
+    });
+
+    /* Card click delegation — main content */
+    mainEl.addEventListener('click', e => {
+      if (e.target.closest('.watchlist-btn')) return; /* handled separately */
+      const infoBtn = e.target.closest('.info-btn');
+      const card    = e.target.closest('.card');
+      if (infoBtn) { openModal(infoBtn.dataset.id); return; }
+      if (card && card.dataset.id) openModal(card.dataset.id);
+    });
+
+    /* Search result click */
+    searchResults.addEventListener('click', e => {
+      const card = e.target.closest('.card');
+      if (card && card.dataset.id) {
+        searchOverlay.classList.remove('open');
+        openModal(card.dataset.id);
+      }
+    });
+
+    /* Hero "More Info" */
+    document.getElementById('moreInfoBtn').addEventListener('click', () => openModal('m8'));
+
+    /* ──────────────────────────────────────────────
+       WATCHLIST TOGGLE (cards)
+    ────────────────────────────────────────────── */
+    mainEl.addEventListener('click', e => {
+      const btn = e.target.closest('.watchlist-btn');
+      if (!btn) return;
+      e.stopPropagation();
+      const icon  = btn.querySelector('i');
+      const title = btn.closest('.card')?.querySelector('.card__title')?.textContent || 'Movie';
+      if (icon.classList.contains('fa-plus')) {
+        icon.classList.replace('fa-plus', 'fa-check');
+        btn.style.borderColor = '#46d369';
+        btn.style.color       = '#46d369';
+        showToast(`"${title}" added to My List`, 'success');
+      } else {
+        icon.classList.replace('fa-check', 'fa-plus');
+        btn.style.borderColor = '';
+        btn.style.color       = '';
+      }
+    });
+
+    /* Hero add button */
+    document.getElementById('heroAddBtn').addEventListener('click', function () {
+      const icon = this.querySelector('i');
+      if (icon.classList.contains('fa-plus')) {
+        icon.classList.replace('fa-plus', 'fa-check');
+        this.style.borderColor = '#46d369';
+        this.style.color       = '#46d369';
+        showToast('"Siwar" added to My List', 'success');
+      } else {
+        icon.classList.replace('fa-check', 'fa-plus');
+        this.style.borderColor = '';
+        this.style.color       = '';
+      }
+    });
+
+    /* Hero play button */
+    document.getElementById('heroPlayBtn').addEventListener('click', () =>
+      showToast('Playing Siwar…', 'info'));
+
+    /* ──────────────────────────────────────────────
+       TOAST
+    ────────────────────────────────────────────── */
+    function showToast(msg, type) {
+      const tc    = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      toast.className = `toast${type ? ' toast--' + type : ''}`;
+      toast.textContent = msg;
+      tc.appendChild(toast);
+      setTimeout(() => toast.remove(), 3200);
+    }
+
+    /* Welcome notification */
+    setTimeout(() => showToast('Welcome back! New titles added today.', 'info'), 1200);
+
+    /* ──────────────────────────────────────────────
+       INIT — navbar scroll effect from moviezone.js
+    ────────────────────────────────────────────── */
+    if (typeof initNavbar === 'function') initNavbar();
+  </script>
+</body>
+</html>
