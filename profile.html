@@ -19,21 +19,18 @@
   <nav class="navbar__links">
     <a href="index.html">Home</a>
     <a href="details.html">Details</a>
-    <a href="login.html">Login</a>
-    <a href="profile.html" class="active">Profile</a>
-    <a href="search.html">Search</a>
+    <a href="profile.html">Profile</a>
+    <a href="search.html" class="active">Search</a>
     <a href="categories.html">Categories</a>
-  </nav>
+    <a href="login.html">Login</a>
+</nav>
 
   <div class="navbar__right">
-    <a href="search.html" class="navbar__search-text">Search</a>
-    <div class="navbar__avatar">R</div>
+  
+    <div class="navbar__avatar">👤</div>
   </div>
 </header>
 
-  <!-- =========================================
-       PAGE HEADER
-  ========================================= -->
   <section class="page-header">
     <h1 class="page-header__title">My Profile</h1>
 
@@ -131,9 +128,6 @@
 
   </section>
 
-  <!-- =========================================
-       CONTINUE WATCHING
-  ========================================= -->
   <section class="content-section">
     <div class="section-header">
       <h2 class="section-title">Continue Watching</h2>
@@ -215,6 +209,7 @@
           <div class="card__progress">
             <div class="card__progress-fill" style="width: 82%;"></div>
           </div>
+          
 
           <div class="card__overlay"></div>
 
@@ -289,15 +284,13 @@
       </div>
     </div>
 
-    <div class="footer__bottom">
-      <p class="footer__copy">© 2026 MovieZone. All rights reserved.</p>
-
-      <select class="footer__lang-select">
-        <option>English</option>
-        <option>Arabic</option>
-      </select>
-    </div>
-  </footer>
+     <div class="footer__bottom">
+    <p class="footer__copy">&copy; 2026 MovieZone. All rights reserved — YARSHA</p>
+    <select class="footer__lang-select">
+      <option value="en">🌐 English</option>
+    </select>
+  </div>
+</footer>
 
   <!-- =========================================
        SEARCH  OVERLAY
@@ -314,10 +307,46 @@
 
     <div class="search-results"></div>
   </div>
+<script>
+window.onload = function() {
 
-  <!-- =========================================
-       MAIN JS
-  ========================================= -->
+  const email = localStorage.getItem('userEmail');
+  const username = localStorage.getItem('username');
+  const fullName = localStorage.getItem('fullName');
+
+  if (email && username) {
+
+    const nameForAvatar = fullName || username;
+
+    // البيانات الأساسية
+    document.querySelector('.profile-card__email').innerText = email;
+    document.getElementById('profileUsername').innerText = username;
+    document.querySelector('.profile-card__name').innerText = nameForAvatar;
+
+    // 🔥 أفاتار البروفايل
+    document.querySelector('.profile-card__avatar').innerText =
+      nameForAvatar.substring(0,2).toUpperCase();
+
+    // 🔥 أفاتار النافبار (اللي فوق)
+    document.querySelector('.navbar__avatar').innerText =
+      nameForAvatar.substring(0,2).toUpperCase();
+
+    // تعبئة الحقول
+    document.getElementById('nameInput').value = nameForAvatar;
+    document.getElementById('emailInput').value = email;
+
+  } else {
+    window.location.href = 'login.html';
+  }
+
+};
+
+// 🔴 Logout
+document.getElementById('logoutBtn').addEventListener('click', () => {
+  localStorage.clear();
+  window.location.href = 'login.html';
+});
+</script>
   <script src="moviezone.js"></script>
 </body>
 </html>

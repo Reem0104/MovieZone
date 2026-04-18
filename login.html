@@ -123,12 +123,19 @@
             document.getElementById('loginBox').style.display = 'block';
         }
 
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const emailValue = document.getElementById('email').value;
-            localStorage.setItem('movieZoneUser', emailValue.split('@')[0]);
-            window.location.href = 'index.html'; 
-        });
-    </script>
+      document.getElementById('loginForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+
+    // تخزين البيانات
+    localStorage.setItem('fullName', name);
+    localStorage.setItem('userEmail', email);
+    localStorage.setItem('username', email.split('@')[0]);
+
+    window.location.href = 'index.html';
+});
+</script>
 </body>
 </html>
