@@ -4,33 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MovieZone - Details Page</title>
+  <link rel="stylesheet" href="moviezone.css" />
     <style>
         /* التنسيقات العامة للموقع */
         body {
             background-color: #141414;
-            color: white;
+            color: rgb(120, 66, 66);
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             margin: 0;
-            padding-top: 70px;
+            padding-top: 70px; /* لضمان عدم اختفاء المحتوى خلف الشريط الثابت */
             overflow-x: hidden;
         }
-
-        /* --- دعم اتجاه اللغة العربية --- */
-        body.rtl { direction: rtl; }
 
         /* --- شريط التنقل (Navbar) --- */
         .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background-color: rgba(0, 0, 0, 0.95);
+            background-color: rgba(0, 0, 0, 0.466);
             padding: 15px 50px;
             position: fixed;
             top: 0;
             width: 100%;
             z-index: 1000;
             box-sizing: border-box;
-            border-bottom: 1px solid #333;
+            border-bottom: 1px solid #000000;
         }
 
         .logo {
@@ -41,7 +39,7 @@
             text-decoration: none;
             text-transform: uppercase;
         }
-        .logo span { color: white; }
+        .logo span { color: E50914; }
 
         .nav-links {
             list-style: none;
@@ -109,7 +107,7 @@
             line-height: 1.5;
             margin-bottom: 30px;
             color: #ffffff;
-            text-shadow: 1px 1px 5px rgba(0,0,0,0.8);
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.854);
         }
 
         .btn {
@@ -137,48 +135,40 @@
             gap: 15px;
         }
 
-        .movie-card { cursor: pointer; transition: transform 0.3s; }
+        .movie-card { 
+            cursor: pointer; 
+            transition: transform 0.3s; 
+        }
+        
         .movie-card:hover { transform: scale(1.05); }
-        .movie-card img { width: 100%; aspect-ratio: 2 / 3; object-fit: cover; border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
+
+        .movie-card img { 
+            width: 100%; 
+            aspect-ratio: 2 / 3; 
+            object-fit: cover; 
+            border-radius: 4px; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5); 
+        }
 
         /* قسم القائمة المحفوظة */
         .my-list-gallery { padding: 40px 50px; border-top: 1px solid #333; display: none; }
         .my-list-gallery.active { display: block; }
-
-        /* --- الفوتر (التوثيق ولغة الموقع) --- */
-        .footer {
-            padding: 30px 50px;
-            background-color: #141414;
-            color: #808080;
-            border-top: 1px solid #333;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 14px;
-        }
-        .lang-selector {
-            background: #000;
-            color: #fff;
-            border: 1px solid #444;
-            padding: 5px 12px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
     </style>
 </head>
-<body id="mainBody">
+<body>
 
     <nav class="navbar">
         <a href="index.html" class="logo">MOVIE<span>ZONE</span></a>
         <ul class="nav-links">
-            <li><a href="index.html" id="nav-home">Home</a></li>
-            <li><a href="details.html" class="active" id="nav-details">Details</a></li>
-            <li><a href="login.html" id="nav-login">Login</a></li>
-            <li><a href="profile.html" id="nav-profile">Profile</a></li>
-            <li><a href="search.html" id="nav-search">Search</a></li>
-            <li><a href="Categories.html" id="nav-cats">Categories</a></li>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="details.html" class="active">Details</a></li>
+            <li><a href="search.html">Search</a></li>
+            <li><a href="Categories.html">Categories</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="login.html">Login</a></li>
+
         </ul>
-        <div class="user-icon">R</div>
+        <div class="user-icon">👤</div>
     </nav>
 
     <header id="hero" class="hero" style="background-image: url('Images/Inception.webp');">
@@ -196,77 +186,59 @@
                 Dom Cobb is a skilled thief, the absolute best in the dangerous art of extraction, stealing valuable secrets from deep within the subconscious during the dream state.
             </p>
             <div class="action-btns">
-                <button class="btn btn-play" id="btn-play">▶Play</button>
+                <button class="btn btn-play">▶Play</button>
                 <button id="listBtn" class="btn btn-list" onclick="toggleMyList()">+ My List</button>
             </div>
         </div>
     </header>
 
     <section class="selection-shelf">
-        <h2 id="shelf-title">Select a Movie to View Details</h2>
+        <h2>Select a Movie to View Details</h2>
         <div class="grid-layout">
-            <div class="movie-card" onclick="changeMovie('Inception', '2010', '2h 28m', '98% Match', 'Dom Cobb is a skilled thief...', 'Images/Inception.webp')">
+            <div class="movie-card" onclick="changeMovie('Inception', '2010', '2h 28m', '98% Match', 'Dom Cobb is a skilled thief, the absolute best in the dangerous art of extraction...', 'Images/Inception.webp')">
                 <img src="Images/Inception.webp" alt="Inception">
             </div>
-            <div class="movie-card" onclick="changeMovie('Interstellar', '2014', '2h 49m', '95% Match', 'Traveling beyond this galaxy...', 'Images/Interstellar.webp')">
+            <div class="movie-card" onclick="changeMovie('Shabab Al Bomb', '2026', '1h 55m', '96% Match', 'A group of young men find themselves facing a gang of forty. Amer\'s courage and innovative ideas turn enemies into heroes.', 'https://assets.voxcinemas.com/posters/P_HO00011012.jpg')">
+    <img src="https://assets.voxcinemas.com/posters/P_HO00011012.jpg" alt="Shabab Al Bomb">
+          </div>
+
+              <div class="movie-card" onclick="changeMovie('Siwar', '2025', '2h 0m', '94% Match', 'A Saudi drama inspired by true 2003 events. Two newborns — one Saudi, one Turkish — switched in a Najran hospital.', 'https://cdn.al-ain.com/lg/images/2025/7/20/205-094545-437490.jpg-2-.jpg')">
+           <img src="https://cdn.al-ain.com/lg/images/2025/7/20/205-094545-437490.jpg-2-.jpg" alt="Siwar">
+                 </div>
+             <div class="movie-card" onclick="changeMovie('Mandoob', '2023', '2h 2m', '91% Match', 'A delivery driver is pulled into an underworld of secrets and moral dilemmas in Riyadh.', 'https://i.ytimg.com/vi/kbfEXH6T4vA/maxresdefault.jpg')">
+               <img src="https://i.ytimg.com/vi/kbfEXH6T4vA/maxresdefault.jpg" alt="Mandoob">
+             </div>
+
+               <div class="movie-card" onclick="changeMovie('Norah', '2023', '1h 42m', '93% Match', 'A Saudi girl seeks freedom and self-expression in 1990s rural Saudi Arabia.', 'https://tse1.mm.bing.net/th/id/OIP.-9ilX7RuwAkUZQdby9I0iAHaK7?rs=1&pid=ImgDetMain&o=7&rm=3')">
+                <img src="https://tse1.mm.bing.net/th/id/OIP.-9ilX7RuwAkUZQdby9I0iAHaK7?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Norah">
+              </div>
+
+            <div class="movie-card" onclick="changeMovie('Interstellar', '2014', '2h 49m', '95% Match', 'Traveling beyond this galaxy to discover whether mankind has a future among the stars...', 'Images/Interstellar.webp')">
                 <img src="Images/Interstellar.webp" alt="Interstellar">
             </div>
-            <div class="movie-card" onclick="changeMovie('Joker', '2019', '2h 2m', '92% Match', 'Arthur Fleck is a man...', 'Images/Joker.jpg')">
+            <div class="movie-card" onclick="changeMovie('Joker', '2019', '2h 2m', '92% Match', 'Arthur Fleck is a man struggling to find his way in Gotham\'s fractured society...', 'Images/Joker.jpg')">
                 <img src="Images/Joker.jpg" alt="Joker">
             </div>
-            <div class="movie-card" onclick="changeMovie('Avengers', '2012', '2h 23m', '96% Match', 'Earth\'s mightiest heroes...', 'Images/Avengers.webp')">
+            <div class="movie-card" onclick="changeMovie('Avengers', '2012', '2h 23m', '96% Match', 'Earth\'s mightiest heroes must come together to pull the world back from disaster...', 'Images/Avengers.webp')">
                 <img src="Images/Avengers.webp" alt="Avengers">
             </div>
-            <div class="movie-card" onclick="changeMovie('Titanic', '1997', '3h 14m', '89% Match', 'The story of a young couple...', 'Images/Titanic.webp')">
+            <div class="movie-card" onclick="changeMovie('Titanic', '1997', '3h 14m', '89% Match', 'The story of a young couple on the ill-fated maiden voyage of the Titanic...', 'Images/Titanic.webp')">
                 <img src="Images/Titanic.webp" alt="Titanic">
             </div>
-            <div class="movie-card" onclick="changeMovie('Frozen', '2013', '1h 42m', '85% Match', 'Anna teams up with...', 'Images/Frozen.webp')">
+            <div class="movie-card" onclick="changeMovie('Frozen', '2013', '1h 42m', '85% Match', 'Anna teams up with a mountain man to find her sister Elsa whose powers trapped the kingdom in winter...', 'Images/Frozen.webp')">
                 <img src="Images/Frozen.webp" alt="Frozen">
             </div>
         </div>
     </section>
 
     <section id="myListSection" class="my-list-gallery">
-        <h2 id="saved-title" style="color: #E50914;">My Saved Movies</h2>
+        <h2 style="color: #E50914;">My Saved Movies</h2>
         <div id="myListGrid" class="grid-layout"></div>
     </section>
-
-    <footer class="footer">
-        <div id="copyright">© 2026 MovieZone. All rights reserved – YARSHA</div>
-        <select class="lang-selector" onchange="changeLanguage(this.value)">
-            <option value="en">English</option>
-            <option value="ar">العربية</option>
-        </select>
-    </footer>
 
     <script>
         let mySavedList = JSON.parse(localStorage.getItem('myFinalList')) || [];
         let currentActive = { title: 'Inception', img: 'Images/Inception.webp' };
-        let currentLang = 'en';
-
-        // نصوص الترجمة
-        const translations = {
-            en: { home: "Home", details: "Details", login: "Login", profile: "Profile", search: "Search", cats: "Categories", play: "▶Play", myList: "+ My List", inList: "✓ In My List", shelf: "Select a Movie to View Details", saved: "My Saved Movies", copy: "© 2026 MovieZone. All rights reserved – YARSHA" },
-            ar: { home: "الرئيسية", details: "التفاصيل", login: "دخول", profile: "الملف الشخصي", search: "بحث", cats: "الأصناف", play: "▶تشغيل", myList: "+ قائمتي", inList: "✓ في قائمتي", shelf: "اختر فيلماً لعرض التفاصيل", saved: "أفلامي المحفوظة", copy: "© 2026 موفي زون. جميع الحقوق محفوظة – YARSHA" }
-        };
-
-        function changeLanguage(lang) {
-            currentLang = lang;
-            const body = document.getElementById('mainBody');
-            if(lang === 'ar') body.classList.add('rtl'); else body.classList.remove('rtl');
-
-            document.getElementById('nav-home').innerText = translations[lang].home;
-            document.getElementById('nav-details').innerText = translations[lang].details;
-            document.getElementById('nav-login').innerText = translations[lang].login;
-            document.getElementById('nav-profile').innerText = translations[lang].profile;
-            document.getElementById('nav-search').innerText = translations[lang].search;
-            document.getElementById('nav-cats').innerText = translations[lang].cats;
-            document.getElementById('btn-play').innerText = translations[lang].play;
-            document.getElementById('shelf-title').innerText = translations[lang].shelf;
-            document.getElementById('saved-title').innerText = translations[lang].saved;
-            document.getElementById('copyright').innerText = translations[lang].copy;
-            updateBtn();
-        }
 
         function changeMovie(title, year, dur, match, desc, img) {
             currentActive = { title, img };
@@ -295,10 +267,10 @@
             const btn = document.getElementById('listBtn');
             const exists = mySavedList.some(m => m.title === currentActive.title);
             if (exists) {
-                btn.innerText = translations[currentLang].inList;
+                btn.innerText = "✓ In My List";
                 btn.classList.add('added');
             } else {
-                btn.innerText = translations[currentLang].myList;
+                btn.innerText = "+ My List";
                 btn.classList.remove('added');
             }
         }
@@ -323,5 +295,13 @@
             updateBtn();
         };
     </script>
+    <footer style="background:#111; padding:20px; text-align:center; margin-top:40px;">
+  <div class="footer__bottom">
+    <p class="footer__copy">&copy; 2026 MovieZone. All rights reserved — YARSHA</p>
+    <select class="footer__lang-select">
+      <option value="en">🌐 English</option>
+    </select>
+  </div>
+</footer>
 </body>
 </html>
