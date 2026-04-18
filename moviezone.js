@@ -202,11 +202,10 @@ function initProfile() {
 }
 
 /* =========================================
-   INITIALIZE EVERYTHING
+   INITIALIZE  EVERYTHING
 ========================================= */
 document.addEventListener('DOMContentLoaded', function () {
   initNavbar();
   initSearch();
   initProfile();
-});
 });
