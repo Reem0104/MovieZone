@@ -93,44 +93,47 @@ input, select {
   top: 0;
   left: 0;
   width: 100%;
-  height: var(--nav-height);
+  height: 78px;
   z-index: 1000;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 4%;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.85) 0%, transparent 100%);
-  transition: background var(--transition);
+  padding: 0 28px;
+  background: #111111;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
 }
 
 .navbar.scrolled {
-  background: var(--bg-nav);
-  box-shadow: 0 2px 20px rgba(0,0,0,0.5);
+  background: #111111;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
 }
 
 .navbar__logo {
   font-family: var(--font-display);
-  font-size: 2rem;
-  letter-spacing: 3px;
+  font-size: 3rem;
+  letter-spacing: 2px;
   color: var(--red);
-  text-shadow: 0 0 20px rgba(229,9,20,0.4);
+  line-height: 1;
   user-select: none;
+  white-space: nowrap;
 }
 
 .navbar__logo span {
-  color: var(--text-white);
+  color: var(--red);
 }
 
 .navbar__links {
-  display: flex !important ;
-  gap: 1.5rem;
+  display: flex !important;
   align-items: center;
+  gap: 2.2rem;
+  margin-left: auto;
+  margin-right: 2.5rem;
 }
 
 .navbar__links a {
-  font-size: 0.88rem;
-  font-weight: 500;
-  color: var(--text-dim);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-white);
   transition: color var(--transition);
 }
 
@@ -142,82 +145,42 @@ input, select {
 .navbar__right {
   display: flex;
   align-items: center;
-  gap: 1.2rem;
+  gap: 1.4rem;
+}
+
+.navbar__search-text {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-white);
+  transition: color var(--transition);
+}
+
+.navbar__search-text:hover {
+  color: var(--red);
 }
 
 .navbar__search-btn,
 .navbar__bell-btn {
-  background: transparent;
-  color: var(--text-light);
-  font-size: 1.1rem;
-  padding: 4px;
-  transition: color var(--transition);
-}
-
-.navbar__search-btn:hover,
-.navbar__bell-btn:hover {
-  color: var(--red);
+  display: none;
 }
 
 .navbar__avatar {
-  width: 34px;
-  height: 34px;
-  border-radius: var(--radius-sm);
-  background: linear-gradient(135deg, var(--red-dark), var(--red));
+  width: 42px;
+  height: 42px;
+  border-radius: 6px;
+  background: var(--red);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.75rem;
+  font-size: 1rem;
   font-weight: 700;
   color: var(--text-white);
   transition: transform var(--transition);
 }
 
 .navbar__avatar:hover {
-  transform: scale(1.08);
-}
-
-/* ─── Dropdown ─── */
-.navbar__dropdown {
-  position: absolute;
-  top: calc(var(--nav-height) - 4px);
-  right: 4%;
-  min-width: 180px;
-  background: rgba(20,20,20,0.97);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-md);
-  padding: 0.5rem 0;
-  opacity: 0;
-  pointer-events: none;
-  transform: translateY(-6px);
-  transition: all 0.2s ease;
-  z-index: 999;
-}
-
-.navbar__dropdown.open {
-  opacity: 1;
-  pointer-events: all;
-  transform: translateY(0);
-}
-
-.navbar__dropdown a {
-  display: block;
-  padding: 0.6rem 1.2rem;
-  font-size: 0.85rem;
-  color: var(--text-dim);
-  transition: background var(--transition), color var(--transition);
-}
-
-.navbar__dropdown a:hover {
-  background: rgba(229,9,20,0.1);
-  color: var(--text-white);
-}
-
-.navbar__dropdown hr {
-  border: none;
-  border-top: 1px solid var(--border-subtle);
-  margin: 0.4rem 0;
+  transform: scale(1.05);
 }
 
 /* ============================================
@@ -1316,33 +1279,34 @@ input, select {
 @media (max-width: 768px) {
   :root { --nav-height: 56px; }
 
-  .navbar__links { display: none; }
-
-  .hero {
-    height: 65vh;
-    padding-bottom: 12%;
+  .navbar {
+    height: auto;
+    padding: 1rem;
+    flex-wrap: wrap;
+    gap: 1rem;
   }
 
-  .hero__description { display: none; }
-
-  .hero__title { font-size: clamp(2rem, 8vw, 3rem); }
-
-  .card { flex: 0 0 calc(33.33% - 5px); }
-
-  .card:hover {
-    transform: scale(1.12);
+  .navbar__logo {
+    font-size: 2.2rem;
   }
 
-  .modal { width: 96%; }
-  .modal__details { grid-template-columns: 1fr; }
-
-  .footer__top { flex-direction: column; }
-  .footer__columns { gap: 1.5rem; }
-
-  .grid-view {
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  .navbar__links {
+    display: flex !important;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 0;
+    width: 100%;
+    justify-content: center;
   }
-}
+
+  .navbar__links a {
+    font-size: 0.95rem;
+  }
+
+  .navbar__right {
+    width: 100%;
+    justify-content: center;
+  }
 
 /* Mobile S */
 @media (max-width: 480px) {
