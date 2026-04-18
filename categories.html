@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Movie Zone</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="moviezone.css" />
+
+  <style>
+    /* ── Page background ── */
+    body {
+      padding-top: 68px;
+      background-color: #141414;
+    }
+
+    /* ── Category Tabs Bar ── */
+    .cat-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      padding: 1.2rem 4%;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      flex-wrap: wrap;
+    }
+
+    .cat-bar__btn {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.18);
+      color: #b3b3b3;
+      font-family: 'Barlow', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 500;
+      padding: 0.45rem 1.2rem;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .cat-bar__btn:hover {
+      color: #fff;
+      border-color: #fff;
+      background: rgba(255,255,255,0.08);
+    }
+
+    .cat-bar__btn.active {
+      background: #E50914;
+      border-color: #E50914;
+      color: #fff;
+      font-weight: 600;
+    }
+
+    /* ── Section Title ── */
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.55rem;
+      letter-spacing: 2px;
+      color: #fff;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      direction: rtl;
+    }
+
+    .section-title::before {
+      content: '';
+      display: inline-block;
+      width: 4px;
+      height: 1.4rem;
+      background: #E50914;
+      border-radius: 2px;
+    }
+
+    /* ── Category Section ── */
+    .cat-section {
+      padding: 2rem 4%;
+      display: none;
+      direction: rtl;
+    }
+
+    .cat-section.visible {
+      display: block;
+    }
+
+    /* ── Cards Grid ── */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 1rem;
+    }
+
+    /* ── Card ── */
+    .card {
+      background: #1a1a1a;
+      border-radius: 6px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      position: relative;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.7);
+      z-index: 2;
+    }
+
+    .card__thumb {
+      width: 100%;
+      height: 230px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .card__thumb-placeholder {
+      width: 100%;
+      height: 230px;
+      background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+    }
+
+    .card__info {
+      padding: 0.7rem 0.8rem;
+    }
+
+    .card__title {
+      color: #E5E5E5;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .card__meta-row {
+      display: flex;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      color: #808080;
+      flex-wrap: wrap;
+    }
+
+    .card__match {
+      color: #46d369;
+      font-weight: 700;
+    }
+
+    .card__genres {
+      font-size: 0.73rem;
+      color: #808080;
+      margin-top: 0.3rem;
+    }
+
+    /* ── Search Bar ── */
+    .search-wrapper {
+      padding: 1.5rem 4% 0;
+      direction: rtl;
+    }
+
+    .search-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 8px;
+      padding: 0.6rem 1rem;
+      max-width: 420px;
+    }
+
+    .search-bar__input {
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #fff;
+      font-family: 'Barlow', sans-serif;
+      font-size: 0.95rem;
+      width: 100%;
+    }
+
+    .search-bar__input::placeholder { color: #808080; }
+
+    .search-results {
+      margin-top: 1rem;
+      direction: rtl;
+    }
+
+    .search-results__title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.3rem;
+      color: #fff;
+      margin-bottom: 1rem;
+      letter-spacing: 1px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════
+       NAVBAR
+  ══════════════════════════════════════ -->
+  <nav class="navbar" id="navbar" style="direction: ltr;">
+
+    <!-- اليسار: أيقونات -->
+    <div class="navbar__right">
+      <div class="navbar__avatar">
+        <i class="fa-solid fa-circle-user" style="font-size:1.9rem; color:#b3b3b3;"></i>
+      </div>
+      <button class="navbar__bell-btn"><i class="fa-solid fa-bell"></i></button>
+      <button class="navbar__search-btn" id="searchToggle"><i class="fa-solid fa-magnifying-glass"></i></button>
+    </div>
+
+    <!-- اليمين: اللوغو -->
+    <a href="#" class="navbar__logo">MOVIE <span>ZONE</span></a>
+
+  </nav>
+
+
+  <!-- ══════════════════════════════════════
+       CATEGORY TABS BAR
+  ══════════════════════════════════════ -->
+  <div class="cat-bar">
+    <button class="cat-bar__btn active" data-cat="all">all</button>
+    <button class="cat-bar__btn" data-cat="movies">movies</button>
+    <button class="cat-bar__btn" data-cat="new">new</button>
+    <button class="cat-bar__btn" data-cat="world">global</button>
+  </div>
+
+
+  <!-- ══════════════════════════════════════
+       SEARCH BAR (تظهر عند الضغط على أيقونة البحث)
+  ══════════════════════════════════════ -->
+  <div class="search-wrapper" id="searchWrapper" style="display:none;">
+    <div class="search-bar">
+      <i class="fa-solid fa-magnifying-glass" style="color:#808080;"></i>
+      <input class="search-bar__input" type="text" placeholder="ابحث عن فيلم أو مسلسل..." />
+    </div>
+    <div class="search-results" id="searchResults"></div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════
+       SECTION: الكل
+  ══════════════════════════════════════ -->
+  <section class="cat-section visible" id="sec-all">
+    <h2 class="section-title"> all work</h2>
+    <div class="cards-grid" id="grid-all"></div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════
+       SECTION: أفلام
+  ══════════════════════════════════════ -->
+  <section class="cat-section" id="sec-movies">
+    <h2 class="section-title">movies</h2>
+    <div class="cards-grid" id="grid-movies"></div>
+  </section>
+
+
+
+
+  <!-- ══════════════════════════════════════
+       SECTION: الجديد
+  ══════════════════════════════════════ -->
+  <section class="cat-section" id="sec-new">
+    <h2 class="section-title"> new</h2>
+    <div class="cards-grid" id="grid-new"></div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════
+       SECTION: عالمي
+  ══════════════════════════════════════ -->
+  <section class="cat-section" id="sec-world">
+    <h2 class="section-title">global</h2>
+    <div class="cards-grid" id="grid-world"></div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════
+       JS
+  ══════════════════════════════════════ -->
+  <script src="moviezone.js"></script>
+  <script>
+    /* ── بيانات الأفلام موزعة على تصنيفات ── */
+    const allContent = [
+      // أفلام
+      { id:"1", title:"Inception",     thumb:"images/Inception.webp",    cat:"movies", genres:["Action","Sci-Fi"],       year:"2010", duration:"2h 28m", match:"95%" },
+      { id:"2", title:"Interstellar",  thumb:"images/Interstellar.webp", cat:"movies", genres:["Sci-Fi","Drama"],        year:"2014", duration:"2h 49m", match:"97%" },
+      { id:"3", title:"Joker",         thumb:"images/Joker.jpg",         cat:"movies", genres:["Drama","Crime"],         year:"2019", duration:"2h 2m",  match:"91%" },
+      { id:"4", title:"Avengers",      thumb:"images/Avengers.webp",     cat:"movies", genres:["Action","Adventure"],   year:"2012", duration:"2h 23m", match:"94%" },
+      { id:"5", title:"Titanic",       thumb:"images/Titanic.webp",      cat:"movies", genres:["Romance","Drama"],      year:"1997", duration:"3h 14m", match:"89%" },
+
+      
+    // الجديد
+    { id:"6", title:"Inception",     thumb:"images/Inception.webp",    cat:"movies", genres:["Action","Sci-Fi"],       year:"2010", duration:"2h 28m", match:"95%" },
+      { id:"8", title:"Frozen",        thumb:"images/Frozen.webp",       cat:"new",    genres:["Animation","Family"],   year:"2013", duration:"1h 42m", match:"90%" },
+     
+    
+    ];
+
+    /* ── بناء بطاقة ── */
+    function makeCard(item) {
+      const img = item.thumb
+        ? `<img class="card__thumb" src="${item.thumb}" alt="${item.title}">`
+        : `<div class="card__thumb-placeholder">${item.emoji || '🎬'}</div>`;
+      return `
+        <div class="card">
+          ${img}
+          <div class="card__info">
+            <p class="card__title">${item.title}</p>
+            <div class="card__meta-row">
+              <span class="card__match">${item.match} Match</span>
+              <span>${item.year}</span>
+              <span>${item.duration}</span>
+            </div>
+            <p class="card__genres">${item.genres.join(' · ')}</p>
+          </div>
+        </div>`;
+    }
+
+    /* ── ملء الـ Grids ── */
+    function fillGrid(id, items) {
+      const el = document.getElementById(id);
+      if (el) el.innerHTML = items.map(makeCard).join('');
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      fillGrid('grid-all',    allContent);
+      fillGrid('grid-movies', allContent.filter(x => x.cat === 'movies'));
+      fillGrid('grid-new',    allContent.filter(x => x.cat === 'new'));
+      fillGrid('grid-world',  allContent.filter(x => x.cat === 'world'));
+
+      /* ── تبديل التصنيفات ── */
+      document.querySelectorAll('.cat-bar__btn').forEach(btn => {
+        btn.addEventListener('click', function () {
+          document.querySelectorAll('.cat-bar__btn').forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+          const cat = this.dataset.cat;
+          document.querySelectorAll('.cat-section').forEach(sec => {
+            sec.classList.toggle('visible', sec.id === 'sec-' + cat);
+          });
+        });
+      });
+
+      /* ── زر البحث ── */
+      document.getElementById('searchToggle').addEventListener('click', function () {
+        const sw = document.getElementById('searchWrapper');
+        sw.style.display = sw.style.display === 'none' ? 'block' : 'none';
+      });
+
+      /* ── البحث الفعلي ── */
+      document.querySelector('.search-bar__input').addEventListener('input', function () {
+        const q = this.value.toLowerCase().trim();
+        const results = document.getElementById('searchResults');
+        if (!q) { results.innerHTML = ''; return; }
+        const found = allContent.filter(x => x.title.toLowerCase().includes(q));
+        results.innerHTML = found.length
+          ? `<p class="search-results__title">نتائج: "${q}"</p><div class="cards-grid">${found.map(makeCard).join('')}</div>`
+          : `<p class="search-results__title" style="color:#808080;">لا توجد نتائج لـ "${q}"</p>`;
+      });
+
+      /* ── Navbar scroll ── */
+      initNavbar();
+    });
+  </script>
+
+</body>
+</html>
