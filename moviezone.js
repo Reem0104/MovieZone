@@ -156,7 +156,50 @@ function initSearch() {
     `;
   });
 }
+/* =========================================
+   PROFILE PAGE
+========================================= */
+function initProfile() {
+  const editBtn = document.getElementById('editProfileBtn');
+  const saveBtn = document.getElementById('saveProfileBtn');
+  const logoutBtn = document.getElementById('logoutBtn');
 
+  const nameInput = document.getElementById('nameInput');
+  const emailInput = document.getElementById('emailInput');
+
+  const profileName = document.querySelector('.profile-card__name');
+  const profileEmail = document.querySelector('.profile-card__email');
+
+  if (!editBtn || !saveBtn || !logoutBtn || !nameInput || !emailInput || !profileName || !profileEmail) return;
+
+  // Fill inputs with current data
+  nameInput.value = profileName.textContent;
+  emailInput.value = profileEmail.textContent;
+
+  // Edit button
+  editBtn.addEventListener('click', function () {
+    nameInput.disabled = false;
+    emailInput.disabled = false;
+    saveBtn.style.display = 'inline-flex';
+    nameInput.focus();
+  });
+
+  // Save button
+  saveBtn.addEventListener('click', function () {
+    profileName.textContent = nameInput.value;
+    profileEmail.textContent = emailInput.value;
+
+    nameInput.disabled = true;
+    emailInput.disabled = true;
+    saveBtn.style.display = 'none';
+  });
+
+  // Logout button
+  logoutBtn.addEventListener('click', function () {
+    alert('You have been logged out.');
+    window.location.href = 'login.html';
+  });
+}
 
 /* =========================================
    INITIALIZE EVERYTHING
@@ -164,4 +207,6 @@ function initSearch() {
 document.addEventListener('DOMContentLoaded', function () {
   initNavbar();
   initSearch();
+  initProfile();
+});
 });
