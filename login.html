@@ -11,63 +11,108 @@
             --input-bg: #333;
         }
 
-        body, html { margin: 0; padding: 0; width: 100%; height: 100%; background-color: #000; color: white; font-family: 'Arial', sans-serif; overflow: hidden; }
+        body, html { 
+            margin: 0; padding: 0; width: 100%; height: 100%; 
+            background-color: #000; color: white; 
+            font-family: 'Arial', sans-serif; 
+            overflow: hidden; 
+        }
 
         /* Navbar */
-        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 25px 50px; position: absolute; top: 0; width: 100%; box-sizing: border-box; z-index: 100; }
-        .logo { font-weight: 900; font-size: 32px; color: var(--primary-red); text-decoration: none; text-transform: uppercase; }
-        .logo span { color: white; }
+        .navbar { 
+            display: flex; justify-content: space-between; align-items: center; 
+            padding: 25px 50px; position: absolute; top: 0; width: 100%; 
+            box-sizing: border-box; z-index: 100; 
+        }
 
-        .lang-btn { background: rgba(0,0,0,0.5); border: 1px solid #aaa; color: white; padding: 6px 15px; border-radius: 4px; cursor: pointer; font-size: 14px; }
+        .logo { 
+            font-weight: 900; font-size: 32px; 
+            color: var(--primary-red); 
+            text-decoration: none; 
+            text-transform: uppercase; 
+        }
 
-        /* خلفية كراسي السينما الحمراء - رابط مباشر ومضمون */
+        .logo span { color: #E50914; }
+
+        /* Background */
         .login-hero {
-            position: fixed; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center;
+            position: fixed; width: 100%; height: 100%; 
+            display: flex; justify-content: center; align-items: center;
             background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.8)), 
                         url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=2070');
             background-size: cover; background-position: center;
             z-index: 1;
         }
 
-        /* المرحلة الأولى: الترحيب */
-        .welcome-container { text-align: center; z-index: 10; max-width: 850px; }
-        .welcome-container h1 { font-size: 3.5rem; font-weight: 800; margin-bottom: 20px; line-height: 1.1; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
-        .btn-start { background: var(--primary-red); color: white; padding: 18px 50px; font-size: 22px; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; }
+        /* Welcome Section */
+        .welcome-container { 
+            text-align: center; z-index: 10; max-width: 850px; 
+        }
 
-        /* المرحلة الثانية: كرت التسجيل */
+        .welcome-container h1 { 
+            font-size: 3.5rem; font-weight: 800; 
+            margin-bottom: 20px; line-height: 1.1; 
+        }
+
+        .btn-start { 
+            background: var(--primary-red); color: white; 
+            padding: 18px 50px; font-size: 22px; 
+            border: none; border-radius: 4px; 
+            font-weight: bold; cursor: pointer; 
+        }
+
+        /* Login Form */
         .login-form-container {
             display: none; 
-            background-color: rgba(0, 0, 0, 0.85); padding: 60px; border-radius: 10px;
-            width: 100%; max-width: 450px; box-sizing: border-box; box-shadow: 0 15px 35px rgba(0,0,0,0.5); z-index: 10;
+            background-color: rgba(0, 0, 0, 0.85); 
+            padding: 60px; border-radius: 10px;
+            width: 100%; max-width: 450px; 
+            box-sizing: border-box; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5); 
+            z-index: 10;
         }
 
         .input-group { margin-bottom: 18px; }
-        .input-group input { width: 100%; padding: 16px; background: var(--input-bg); border: none; border-radius: 4px; color: white; font-size: 16px; box-sizing: border-box; }
-        .btn-login { width: 100%; padding: 16px; background: var(--primary-red); color: white; border: none; border-radius: 4px; font-size: 17px; font-weight: bold; cursor: pointer; margin-top: 20px; }
-        
-        [dir="rtl"] { text-align: right; }
-        [dir="ltr"] { text-align: left; }
+
+        .input-group input { 
+            width: 100%; padding: 16px; 
+            background: var(--input-bg); 
+            border: none; border-radius: 4px; 
+            color: white; font-size: 16px; 
+        }
+
+        .btn-login { 
+            width: 100%; padding: 16px; 
+            background: var(--primary-red); 
+            color: white; border: none; 
+            border-radius: 4px; font-size: 17px; 
+            font-weight: bold; cursor: pointer; 
+            margin-top: 20px; 
+        }
     </style>
 </head>
 <body>
 
     <nav class="navbar">
         <a href="#" class="logo">MOVIE<span>ZONE</span></a>
-        <button class="lang-btn" onclick="toggleLanguage()" id="langBtn">العربية</button>
     </nav>
 
     <main class="login-hero">
         <div class="welcome-container" id="welcomeBox">
-            <h1 id="heroTitle">Unlimited movies, TV shows, and more.</h1>
-            <button class="btn-start" onclick="showLoginForm()" id="startBtn">Get Started ></button>
+            <h1>Unlimited movies, TV shows, and more.</h1>
+            <button class="btn-start" onclick="showLoginForm()">Get Started ></button>
         </div>
 
         <div class="login-form-container" id="loginBox">
-            <h1 id="title">Sign In</h1>
+            <h1>Sign In</h1>
             <form id="loginForm">
-                <div class="input-group"><input type="email" id="email" placeholder="Email" required></div>
-                <div class="input-group"><input type="password" id="password" placeholder="Password" required></div>
-                <button type="submit" class="btn-login" id="loginBtn">Sign In</button>
+                <div class="input-group">
+                    <input type="email" id="email" placeholder="Email" required>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="password" placeholder="Password" required>
+                </div>
+                <button type="submit" class="btn-login">Sign In</button>
             </form>
         </div>
     </main>
@@ -76,28 +121,6 @@
         function showLoginForm() {
             document.getElementById('welcomeBox').style.display = 'none';
             document.getElementById('loginBox').style.display = 'block';
-        }
-
-        let currentLang = 'en';
-        function toggleLanguage() {
-            const html = document.getElementById('htmlPage');
-            const btn = document.getElementById('langBtn');
-            currentLang = (currentLang === 'en') ? 'ar' : 'en';
-            
-            html.setAttribute('dir', currentLang === 'ar' ? 'rtl' : 'ltr');
-            btn.innerText = currentLang === 'ar' ? 'English' : 'العربية';
-            
-            const texts = {
-                en: { hero: 'Unlimited movies, TV shows, and more.', start: 'Get Started >', title: 'Sign In', email: 'Email', pass: 'Password', btn: 'Sign In' },
-                ar: { hero: 'أفلام ومسلسلات غير محدودة وأكثر.', start: 'ابدأ الآن >', title: 'تسجيل الدخول', email: 'البريد الإلكتروني', pass: 'كلمة المرور', btn: 'دخول' }
-            };
-            
-            document.getElementById('heroTitle').innerText = texts[currentLang].hero;
-            document.getElementById('startBtn').innerText = texts[currentLang].start;
-            document.getElementById('title').innerText = texts[currentLang].title;
-            document.getElementById('email').placeholder = texts[currentLang].email;
-            document.getElementById('password').placeholder = texts[currentLang].pass;
-            document.getElementById('loginBtn').innerText = texts[currentLang].btn;
         }
 
         document.getElementById('loginForm').addEventListener('submit', function(e) {
