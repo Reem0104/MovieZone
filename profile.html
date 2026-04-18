@@ -1,149 +1,332 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Profile</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MovieZone | Profile</title>
 
-  <style>
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-      font-family: Arial, sans-serif;
-    }
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="moviezone.css" />
 
-    body{
-      background: linear-gradient(to right, #141e30, #243b55);
-      color: white;
-      min-height: 100vh;
-      padding: 30px;
-    }
-
-    .container{
-      max-width: 1000px;
-      margin: auto;
-    }
-
-    .profile-card{
-      background-color: rgba(255,255,255,0.08);
-      border-radius: 20px;
-      padding: 30px;
-      text-align: center;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-      margin-bottom: 30px;
-    }
-
-    .profile-card img{
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      border: 4px solid white;
-      object-fit: cover;
-      margin-bottom: 15px;
-    }
-
-    .profile-card h1{
-      font-size: 32px;
-      margin-bottom: 10px;
-    }
-
-    .profile-card p{
-      color: #ddd;
-      font-size: 18px;
-    }
-
-    .section{
-      margin-bottom: 35px;
-    }
-
-    .section h2{
-      margin-bottom: 20px;
-      font-size: 24px;
-      border-left: 6px solid #ffd700;
-      padding-left: 12px;
-    }
-
-    .movies{
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 20px;
-    }
-
-    .movie-card{
-      background-color: rgba(255,255,255,0.08);
-      border-radius: 15px;
-      overflow: hidden;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.25);
-      transition: transform 0.3s;
-      text-align: center;
-      padding-bottom: 15px;
-    }
-
-    .movie-card:hover{
-      transform: translateY(-8px);
-    }
-
-    .movie-card img{
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-    }
-
-    .movie-card h3{
-      margin-top: 12px;
-      font-size: 20px;
-    }
-
-    .movie-card p{
-      color: #ccc;
-      font-size: 14px;
-      margin-top: 5px;
-    }
-  </style>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="moviezone.css" />
 </head>
 <body>
 
-  <div class="container">
+  <!-- =========================================
+       NAVBAR
+  ========================================= -->
+  <header class="navbar">
+    <div class="navbar__logo">MOVIE<span>ZONE</span></div>
 
+    <nav class="navbar__links">
+      <a href="index.html">Home</a>
+      <a href="movies.html">Movies</a>
+      <a href="series.html">Series</a>
+      <a href="my-list.html">My List</a>
+      <a href="profile.html" class="active">Profile</a>
+    </nav>
+
+    <div class="navbar__right">
+      <button class="navbar__search-btn" aria-label="Search">
+        <i class="fas fa-search"></i>
+      </button>
+
+      <button class="navbar__bell-btn" aria-label="Notifications">
+        <i class="fas fa-bell"></i>
+      </button>
+
+      <div class="navbar__avatar">HS</div>
+    </div>
+  </header>
+
+  <!-- =========================================
+       PAGE HEADER
+  ========================================= -->
+  <section class="page-header">
+    <h1 class="page-header__title">My Profile</h1>
+
+    <div class="page-header__filters">
+      <span class="genre-tag active">Account</span>
+      <span class="genre-tag">Subscription</span>
+      <span class="genre-tag">History</span>
+      <span class="genre-tag">Settings</span>
+    </div>
+  </section>
+
+  <!-- =========================================
+       PROFILE SECTION
+  ========================================= -->
+  <section class="profile-grid">
+
+    <!-- Main Profile Card -->
     <div class="profile-card">
-    <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Amna" alt="profile">     <h1>Amna</h1>
-      <p>user@email.com</p>
+      <div class="profile-card__avatar">HS</div>
+      <h2 class="profile-card__name">Hajar Saleh</h2>
+      <p class="profile-card__email">hajar@example.com</p>
+
+      <p class="mt-2 text-muted">Movie lover | Action, Drama, Thriller</p>
+
+      <div class="hero__buttons mt-3" style="justify-content:center;">
+        <button id="editProfileBtn" class="btn btn--red">
+          <i class="fas fa-user-edit"></i>
+          Edit Profile
+        </button>
+
+        <button id="saveProfileBtn" class="btn btn--outline" style="display:none;">
+          <i class="fas fa-save"></i>
+          Save
+        </button>
+
+        <button id="logoutBtn" class="btn btn--secondary">
+          <i class="fas fa-right-from-bracket"></i>
+          Logout
+        </button>
+      </div>
     </div>
 
-    <div class="section">
-      <h2>⭐️ Favorite Movies</h2>
-      <div class="movies">
-        <div class="movie-card">
-          <img src="https://image.tmdb.org/t/p/w500/6CoRTJTmijhBLJTUNoVSUNxZMEI.jpg">            <h3>Film 1</h3>
-          <p>My favorite movie</p>
+    <!-- Editable Info -->
+    <div class="profile-card">
+      <h3 class="section-title mb-2">Edit Information</h3>
+
+      <div style="display:flex; flex-direction:column; gap:1rem; text-align:left;">
+        <div>
+          <label for="nameInput" class="text-muted">Full Name</label>
+          <input
+            type="text"
+            id="nameInput"
+            disabled
+            style="width:100%; margin-top:0.35rem; padding:0.75rem 1rem; background:#111; border:1px solid rgba(255,255,255,0.12); border-radius:6px; color:white;"
+          />
         </div>
 
-        <div class="movie-card">
-          <img src="https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg">          <h3>Film 2</h3>
-          <p>Action and adventure movies</p>
+        <div>
+          <label for="emailInput" class="text-muted">Email</label>
+          <input
+            type="email"
+            id="emailInput"
+            disabled
+            style="width:100%; margin-top:0.35rem; padding:0.75rem 1rem; background:#111; border:1px solid rgba(255,255,255,0.12); border-radius:6px; color:white;"
+          />
         </div>
       </div>
     </div>
 
-    <div class="section">
-      <h2>🕒 Last Watching</h2>
-      <div class="movies">
-        <div class="movie-card">
-          <img src="https://image.tmdb.org/t/p/w500/8UlWHLMpgZm9bx6QYh0NFoq67TZ.jpg">
-          <h3>Film 3</h3>
-          <p>Recently watched</p>
+    <!-- Account Info -->
+    <div class="profile-card">
+      <h3 class="section-title mb-2">Account Info</h3>
+
+      <div style="display:flex; flex-direction:column; gap:0.7rem; text-align:left;">
+        <p><span class="text-muted">Username:</span> <span id="profileUsername" class="text-white">hajar_saleh</span></p>
+        <p><span class="text-muted">Plan:</span> <span id="profilePlan" class="text-red">Premium</span></p>
+        <p><span class="text-muted">Country:</span> <span id="profileCountry" class="text-white">Saudi Arabia</span></p>
+        <p><span class="text-muted">Member Since:</span> <span id="profileMemberSince" class="text-white">2026</span></p>
+        <p><span class="text-muted">Favorite Genre:</span> <span id="profileFavoriteGenre" class="text-white">Drama</span></p>
+      </div>
+    </div>
+
+    <!-- Watch Stats -->
+    <div class="profile-card">
+      <h3 class="section-title mb-2">Watch Stats</h3>
+
+      <div style="display:flex; flex-direction:column; gap:0.7rem; text-align:left;">
+        <p><span class="text-muted">Movies Watched:</span> <span id="moviesWatched" class="text-white">128</span></p>
+        <p><span class="text-muted">Series Completed:</span> <span id="seriesCompleted" class="text-white">24</span></p>
+        <p><span class="text-muted">Hours Watched:</span> <span id="hoursWatched" class="text-white">312 hrs</span></p>
+        <p><span class="text-muted">My List:</span> <span id="myList" class="text-white">36 items</span></p>
+        <p><span class="text-muted">Last Watched:</span> <span id="lastWatched" class="text-white">Inception</span></p>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- =========================================
+       CONTINUE WATCHING
+  ========================================= -->
+  <section class="content-section">
+    <div class="section-header">
+      <h2 class="section-title">Continue Watching</h2>
+      <a href="#" class="section-see-all">See All</a>
+    </div>
+
+    <div class="slider-wrapper">
+      <div class="slider-track">
+
+        <div class="card">
+          <img class="card__thumb" src="images/Inception.webp" alt="Inception">
+
+          <div class="card__progress">
+            <div class="card__progress-fill" style="width: 65%;"></div>
+          </div>
+
+          <div class="card__overlay"></div>
+
+          <div class="card__info">
+            <div class="card__actions">
+              <button class="card__action-btn card__action-btn--play">
+                <i class="fas fa-play"></i>
+              </button>
+              <button class="card__action-btn">
+                <i class="fas fa-thumbs-up"></i>
+              </button>
+              <button class="card__action-btn card__action-btn--add">
+                <i class="fas fa-plus"></i>
+              </button>
+            </div>
+
+            <h3 class="card__title">Inception</h3>
+
+            <div class="card__meta-row">
+              <span class="card__match">95% Match</span>
+              <span class="card__duration">2h 28m</span>
+            </div>
+
+            <p class="card__genres">Action · Sci-Fi</p>
+          </div>
         </div>
 
-        <div class="movie-card">
-         <img src="https://image.tmdb.org/t/p/w500/r7vmZjiyZw9rpJMQJdXpjgiCOk9.jpg">
-          <h3>Film 4</h3>
-          <p>Interesting story movies</p>
+        <div class="card">
+          <img class="card__thumb" src="images/Interstellar.webp" alt="Interstellar">
+
+          <div class="card__progress">
+            <div class="card__progress-fill" style="width: 40%;"></div>
+          </div>
+
+          <div class="card__overlay"></div>
+
+          <div class="card__info">
+            <div class="card__actions">
+              <button class="card__action-btn card__action-btn--play">
+                <i class="fas fa-play"></i>
+              </button>
+              <button class="card__action-btn">
+                <i class="fas fa-thumbs-up"></i>
+              </button>
+              <button class="card__action-btn card__action-btn--add">
+                <i class="fas fa-plus"></i>
+              </button>
+            </div>
+
+            <h3 class="card__title">Interstellar</h3>
+
+            <div class="card__meta-row">
+              <span class="card__match">97% Match</span>
+              <span class="card__duration">2h 49m</span>
+            </div>
+
+            <p class="card__genres">Sci-Fi · Drama</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <img class="card__thumb" src="images/Joker.jpg" alt="Joker">
+
+          <div class="card__progress">
+            <div class="card__progress-fill" style="width: 82%;"></div>
+          </div>
+
+          <div class="card__overlay"></div>
+
+          <div class="card__info">
+            <div class="card__actions">
+              <button class="card__action-btn card__action-btn--play">
+                <i class="fas fa-play"></i>
+              </button>
+              <button class="card__action-btn">
+                <i class="fas fa-thumbs-up"></i>
+              </button>
+              <button class="card__action-btn card__action-btn--add">
+                <i class="fas fa-plus"></i>
+              </button>
+            </div>
+
+            <h3 class="card__title">Joker</h3>
+
+            <div class="card__meta-row">
+              <span class="card__match">91% Match</span>
+              <span class="card__duration">2h 2m</span>
+            </div>
+
+            <p class="card__genres">Drama · Crime</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================
+       FOOTER
+  ========================================= -->
+  <footer class="footer">
+    <div class="footer__top">
+      <div>
+        <div class="footer__logo">MOVIE<span>ZONE</span></div>
+      </div>
+
+      <div class="footer__columns">
+        <div class="footer__col">
+          <h4 class="footer__col-title">Navigation</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="movies.html">Movies</a></li>
+            <li><a href="series.html">Series</a></li>
+            <li><a href="my-list.html">My List</a></li>
+            <li><a href="profile.html">Profile</a></li>
+          </ul>
+        </div>
+
+        <div class="footer__col">
+          <h4 class="footer__col-title">Support</h4>
+          <ul>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Privacy</a></li>
+            <li><a href="#">Terms of Use</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </div>
+
+        <div class="footer__col">
+          <h4 class="footer__col-title">Follow Us</h4>
+          <div class="footer__social">
+            <a href="#" class="footer__social-icon"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="footer__social-icon"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="footer__social-icon"><i class="fab fa-x-twitter"></i></a>
+            <a href="#" class="footer__social-icon"><i class="fab fa-youtube"></i></a>
+          </div>
         </div>
       </div>
     </div>
 
+    <div class="footer__bottom">
+      <p class="footer__copy">© 2026 MovieZone. All rights reserved.</p>
+
+      <select class="footer__lang-select">
+        <option>English</option>
+        <option>Arabic</option>
+      </select>
+    </div>
+  </footer>
+
+  <!-- =========================================
+       SEARCH OVERLAY
+  ========================================= -->
+  <div class="search-overlay">
+    <div class="search-bar">
+      <i class="fas fa-search search-bar__icon"></i>
+      <input
+        type="text"
+        class="search-bar__input"
+        placeholder="Search for a movie..."
+      />
+    </div>
+
+    <div class="search-results"></div>
   </div>
 
+  <!-- =========================================
+       MAIN JS
+  ========================================= -->
+  <script src="main.js"></script>
 </body>
 </html>
