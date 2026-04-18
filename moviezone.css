@@ -99,13 +99,13 @@ input, select {
   align-items: center;
   justify-content: space-between;
   padding: 0 28px;
-  background: #111111;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+  background: transparent;
 }
 
 .navbar.scrolled {
   background: #111111;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+
+  box-shadow: none;
 }
 
 .navbar__logo {
