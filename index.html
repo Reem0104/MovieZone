@@ -180,6 +180,18 @@
   </div>
 
   <!-- ============================================================
+       VIDEO PLAYER
+  ============================================================ -->
+  <div id="videoPlayerBackdrop" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.93);z-index:9999;align-items:center;justify-content:center;">
+    <div style="position:relative;width:90%;max-width:920px;aspect-ratio:16/9;">
+      <button id="videoCloseBtn" style="position:absolute;top:-44px;right:0;background:transparent;border:none;color:#fff;font-size:2rem;cursor:pointer;line-height:1;">&#10005;</button>
+      <iframe id="videoFrame" src="" style="width:100%;height:100%;border:none;border-radius:8px;"
+        allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"
+        allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <!-- ============================================================
        TOAST CONTAINER
   ============================================================ -->
   <div class="toast-container" id="toastContainer"></div>
@@ -312,7 +324,6 @@
           <button class="slider-btn slider-btn--right" aria-label="Scroll right">&#8250;</button>
         </div>`;
 
-      /* inject cards safely (avoids innerHTML XSS and parsing issues) */
       section.querySelector('.slider-track').innerHTML = cards;
       mainEl.appendChild(section);
     });
@@ -446,7 +457,7 @@
     });
 
     mainEl.addEventListener('click', e => {
-      if (e.target.closest('.watchlist-btn')) return; /* handled separately */
+      if (e.target.closest('.watchlist-btn')) return;
       const infoBtn = e.target.closest('.info-btn');
       const card    = e.target.closest('.card');
       if (infoBtn) { openModal(infoBtn.dataset.id); return; }
@@ -500,8 +511,31 @@
         this.style.color       = '';
       }
     });
-    document.getElementById('heroPlayBtn').addEventListener('click', () =>
-      showToast('Playing Siwar…', 'info'));
+
+    /* ──────────────────────────────────────────────
+       HERO PLAY → YouTube Video Player
+    ────────────────────────────────────────────── */
+    document.getElementById('heroPlayBtn').addEventListener('click', () => {
+      const vp = document.getElementById('videoPlayerBackdrop');
+      document.getElementById('videoFrame').src = 'https://www.youtube.com/embed/3VNYcdQn5PY?autoplay=1';
+      vp.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    });
+
+    document.getElementById('videoCloseBtn').addEventListener('click', () => {
+      document.getElementById('videoFrame').src = '';
+      document.getElementById('videoPlayerBackdrop').style.display = 'none';
+      document.body.style.overflow = '';
+    });
+
+    document.getElementById('videoPlayerBackdrop').addEventListener('click', e => {
+      if (e.target.id === 'videoPlayerBackdrop') {
+        document.getElementById('videoFrame').src = '';
+        e.target.style.display = 'none';
+        document.body.style.overflow = '';
+      }
+    });
+
     function showToast(msg, type) {
       const tc    = document.getElementById('toastContainer');
       const toast = document.createElement('div');
