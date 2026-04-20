@@ -515,12 +515,9 @@
     /* ──────────────────────────────────────────────
        HERO PLAY → YouTube Video Player
     ────────────────────────────────────────────── */
-    document.getElementById('heroPlayBtn').addEventListener('click', () => {
-      const vp = document.getElementById('videoPlayerBackdrop');
-      document.getElementById('videoFrame').src = 'https://www.youtube.com/embed/3VNYcdQn5PY?autoplay=1';
-      vp.style.display = 'flex';
-      document.body.style.overflow = 'hidden';
-    });
+   document.getElementById('heroPlayBtn').addEventListener('click', () => {
+  window.open('https://www.youtube.com/watch?v=3VNYcdQn5PY', '_blank');
+});
 
     document.getElementById('videoCloseBtn').addEventListener('click', () => {
       document.getElementById('videoFrame').src = '';
