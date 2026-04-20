@@ -4,259 +4,266 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MovieZone - Details Page</title>
-  <link rel="stylesheet" href="moviezone.css" />
-    <style>
-        /* التنسيقات العامة للموقع */
-        body {
-            background-color: #141414;
-            color: rgb(120, 66, 66);
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            margin: 0;
-            padding-top: 70px; /* لضمان عدم اختفاء المحتوى خلف الشريط الثابت */
-            overflow-x: hidden;
-        }
-
-        /* --- شريط التنقل (Navbar) --- */
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: rgba(0, 0, 0, 0.466);
-            padding: 15px 50px;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            box-sizing: border-box;
-            border-bottom: 1px solid #000000;
-        }
-
-        .logo {
-            font-weight: bold;
-            font-size: 26px;
-            color: #E50914;
-            letter-spacing: 1px;
-            text-decoration: none;
-            text-transform: uppercase;
-        }
-        .logo span { color: E50914; }
-
-        .nav-links {
-            list-style: none;
-            display: flex;
-            gap: 25px;
-            margin: 0;
-            padding: 0;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #e5e5e5;
-            font-size: 14px;
-            font-weight: 500;
-            transition: 0.3s;
-        }
-
-        .nav-links a:hover, .nav-links a.active {
-            color: white;
-            font-weight: bold;
-        }
-
-        .user-icon {
-            background-color: #E50914;
-            color: white;
-            width: 32px;
-            height: 32px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 4px;
-            font-weight: bold;
-            font-size: 14px;
-            cursor: pointer;
-        }
-
-        /* --- قسم عرض الفيلم (Hero Section) --- */
-        .hero {
-            position: relative;
-            height: 80vh;
-            background-size: cover;
-            background-position: center top;
-            transition: background 0.6s ease-in-out;
-            display: flex;
-            align-items: center;
-            padding: 0 50px;
-        }
-
-        .hero-overlay {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to right, #141414 15%, transparent 85%),
-                        linear-gradient(to top, #141414 5%, transparent 40%);
-        }
-
-        .content { position: relative; z-index: 10; max-width: 800px; }
-        h1 { font-size: 60px; margin: 0; text-transform: uppercase; letter-spacing: -1px; }
-
-        .meta-info { margin: 20px 0; display: flex; gap: 15px; align-items: center; color: #a3a3a3; font-size: 16px; }
-        .match { color: #46d369; font-weight: bold; }
-        .badge { border: 1px solid #808080; padding: 2px 8px; font-size: 12px; border-radius: 3px; color: white; }
-
-        .description {
-            font-size: 18px;
-            line-height: 1.5;
-            margin-bottom: 30px;
-            color: #ffffff;
-            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.854);
-        }
-
-        .btn {
-            padding: 12px 35px;
-            font-size: 18px;
-            font-weight: bold;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-right: 12px;
-            transition: 0.3s;
-        }
-        .btn-play { background-color: white; color: black; }
-        .btn-play:hover { background-color: #e6e6e6; }
-        .btn-list { background-color: rgba(109, 109, 110, 0.7); color: white; }
-        .btn-list.added { background-color: #46d369; }
-
-        /* --- شبكة اختيار الأفلام --- */
-        .selection-shelf { padding: 40px 50px; background: #141414; }
-        .selection-shelf h2 { font-size: 22px; color: #e5e5e5; margin-bottom: 20px; }
-        
-        .grid-layout {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-            gap: 15px;
-        }
-
-        .movie-card { 
-            cursor: pointer; 
-            transition: transform 0.3s; 
-        }
-        
-        .movie-card:hover { transform: scale(1.05); }
-
-        .movie-card img { 
-            width: 100%; 
-            aspect-ratio: 2 / 3; 
-            object-fit: cover; 
-            border-radius: 4px; 
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5); 
-        }
-
-        /* قسم القائمة المحفوظة */
-        .my-list-gallery { padding: 40px 50px; border-top: 1px solid #333; display: none; }
-        .my-list-gallery.active { display: block; }
-    </style>
+    <link rel="stylesheet" href="moviezone.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 <body>
 
-    <nav class="navbar">
-        <a href="index.html" class="logo">MOVIE<span>ZONE</span></a>
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="details.html" class="active">Details</a></li>
-            <li><a href="search.html">Search</a></li>
-            <li><a href="Categories.html">Categories</a></li>
-            <li><a href="profile.html">Profile</a></li>
-            <li><a href="login.html">Login</a></li>
-
-        </ul>
-        <div class="user-icon">👤</div>
+    <!-- ============================================================
+         NAVBAR
+    ============================================================ -->
+    <nav class="navbar" id="navbar">
+        <a href="index.html" class="navbar__logo">MOVIE<span>ZONE</span></a>
+        <div class="navbar__links">
+            <a href="index.html">Home</a>
+            <a href="details.html" class="active">Details</a>
+            <a href="search.html">Search</a>
+            <a href="Categories.html">Categories</a>
+            <a href="profile.html">Profile</a>
+            <a href="login.html">Login</a>
+        </div>
+        <div class="navbar__right">
+            <div class="navbar__avatar" id="avatarBtn">👤</div>
+        </div>
     </nav>
 
-    <header id="hero" class="hero" style="background-image: url('Images/Inception.webp');">
-        <div class="hero-overlay"></div>
-        <div class="content">
-            <h1 id="mainTitle">Inception</h1>
-            <div class="meta-info">
-                <span id="mainMatch" class="match">98% Match</span>
-                <span id="mainYear">2010</span>
-                <span class="badge">13+</span>
-                <span id="mainDuration">2h 28m</span>
-                <span class="badge">Ultra HD 4K</span>
+    <!-- ============================================================
+         HERO
+    ============================================================ -->
+    <section class="hero" id="heroSection">
+        <div class="hero__backdrop" id="heroBackdrop"
+             style="background-image:url('Images/Inception.webp');"></div>
+        <div class="hero__overlay"></div>
+        <div class="hero__content">
+            <span class="hero__badge">&#9654; Now Showing</span>
+            <h1 class="hero__title" id="mainTitle">Inception</h1>
+            <div class="hero__meta">
+                <span class="hero__rating" id="mainMatch">98% Match</span>
+                <span class="hero__year" id="mainYear">2010</span>
+                <span class="hero__duration" id="mainDuration">2h 28m</span>
             </div>
-            <p id="mainDesc" class="description">
-                Dom Cobb is a skilled thief, the absolute best in the dangerous art of extraction, stealing valuable secrets from deep within the subconscious during the dream state.
+            <p class="hero__description" id="mainDesc">
+                Dom Cobb is a skilled thief, the absolute best in the dangerous art of extraction,
+                stealing valuable secrets from deep within the subconscious during the dream state.
             </p>
-            <div class="action-btns">
-                <button class="btn btn-play">▶Play</button>
-                <button id="listBtn" class="btn btn-list" onclick="toggleMyList()">+ My List</button>
-            </div>
-        </div>
-    </header>
-
-    <section class="selection-shelf">
-        <h2>Select a Movie to View Details</h2>
-        <div class="grid-layout">
-            <div class="movie-card" onclick="changeMovie('Inception', '2010', '2h 28m', '98% Match', 'Dom Cobb is a skilled thief, the absolute best in the dangerous art of extraction...', 'Images/Inception.webp')">
-                <img src="Images/Inception.webp" alt="Inception">
-            </div>
-            <div class="movie-card" onclick="changeMovie('Shabab Al Bomb', '2026', '1h 55m', '96% Match', 'A group of young men find themselves facing a gang of forty. Amer\'s courage and innovative ideas turn enemies into heroes.', 'https://assets.voxcinemas.com/posters/P_HO00011012.jpg')">
-    <img src="https://assets.voxcinemas.com/posters/P_HO00011012.jpg" alt="Shabab Al Bomb">
-          </div>
-
-              <div class="movie-card" onclick="changeMovie('Siwar', '2025', '2h 0m', '94% Match', 'A Saudi drama inspired by true 2003 events. Two newborns — one Saudi, one Turkish — switched in a Najran hospital.', 'https://cdn.al-ain.com/lg/images/2025/7/20/205-094545-437490.jpg-2-.jpg')">
-           <img src="https://cdn.al-ain.com/lg/images/2025/7/20/205-094545-437490.jpg-2-.jpg" alt="Siwar">
-                 </div>
-             <div class="movie-card" onclick="changeMovie('Mandoob', '2023', '2h 2m', '91% Match', 'A delivery driver is pulled into an underworld of secrets and moral dilemmas in Riyadh.', 'https://i.ytimg.com/vi/kbfEXH6T4vA/maxresdefault.jpg')">
-               <img src="https://i.ytimg.com/vi/kbfEXH6T4vA/maxresdefault.jpg" alt="Mandoob">
-             </div>
-
-               <div class="movie-card" onclick="changeMovie('Norah', '2023', '1h 42m', '93% Match', 'A Saudi girl seeks freedom and self-expression in 1990s rural Saudi Arabia.', 'https://tse1.mm.bing.net/th/id/OIP.-9ilX7RuwAkUZQdby9I0iAHaK7?rs=1&pid=ImgDetMain&o=7&rm=3')">
-                <img src="https://tse1.mm.bing.net/th/id/OIP.-9ilX7RuwAkUZQdby9I0iAHaK7?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Norah">
-              </div>
-
-            <div class="movie-card" onclick="changeMovie('Interstellar', '2014', '2h 49m', '95% Match', 'Traveling beyond this galaxy to discover whether mankind has a future among the stars...', 'Images/Interstellar.webp')">
-                <img src="Images/Interstellar.webp" alt="Interstellar">
-            </div>
-            <div class="movie-card" onclick="changeMovie('Joker', '2019', '2h 2m', '92% Match', 'Arthur Fleck is a man struggling to find his way in Gotham\'s fractured society...', 'Images/Joker.jpg')">
-                <img src="Images/Joker.jpg" alt="Joker">
-            </div>
-            <div class="movie-card" onclick="changeMovie('Avengers', '2012', '2h 23m', '96% Match', 'Earth\'s mightiest heroes must come together to pull the world back from disaster...', 'Images/Avengers.webp')">
-                <img src="Images/Avengers.webp" alt="Avengers">
-            </div>
-            <div class="movie-card" onclick="changeMovie('Titanic', '1997', '3h 14m', '89% Match', 'The story of a young couple on the ill-fated maiden voyage of the Titanic...', 'Images/Titanic.webp')">
-                <img src="Images/Titanic.webp" alt="Titanic">
-            </div>
-            <div class="movie-card" onclick="changeMovie('Frozen', '2013', '1h 42m', '85% Match', 'Anna teams up with a mountain man to find her sister Elsa whose powers trapped the kingdom in winter...', 'Images/Frozen.webp')">
-                <img src="Images/Frozen.webp" alt="Frozen">
+            <div class="hero__buttons">
+                <button class="btn btn--primary">
+                    <i class="fa-solid fa-play"></i> Play
+                </button>
+                <button id="listBtn" class="btn btn--secondary" onclick="toggleMyList()">
+                    <i class="fa-solid fa-plus"></i> My List
+                </button>
             </div>
         </div>
     </section>
 
-    <section id="myListSection" class="my-list-gallery">
-        <h2 style="color: #E50914;">My Saved Movies</h2>
-        <div id="myListGrid" class="grid-layout"></div>
-    </section>
+    <!-- ============================================================
+         MOVIE SELECTION GRID
+    ============================================================ -->
+    <main style="padding-bottom: 2rem;">
+        <section class="content-section">
+            <div class="section-header">
+                <h2 class="section-title">Select a Movie to View Details</h2>
+            </div>
+            <div style="padding: 0 4%; display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px;">
 
+                <div class="card" onclick="changeMovie('Inception','2010','2h 28m','98% Match','Dom Cobb is a skilled thief, the absolute best in the dangerous art of extraction...','Images/Inception.webp')">
+                    <img class="card__thumb" src="Images/Inception.webp" alt="Inception" loading="lazy">
+                    <div class="card__overlay"></div>
+                    <div class="card__info">
+                        <p class="card__title">Inception</p>
+                        <div class="card__meta-row"><span class="card__match">98% Match</span></div>
+                        <p class="card__genres">Action · Sci-Fi</p>
+                    </div>
+                </div>
+
+                <div class="card" onclick="changeMovie('Shabab Al Bomb','2026','1h 55m','96% Match','A group of young men find themselves facing a gang of forty. Amer\'s courage and innovative ideas turn enemies into heroes.','https://assets.voxcinemas.com/posters/P_HO00011012.jpg')">
+                    <img class="card__thumb" src="https://assets.voxcinemas.com/posters/P_HO00011012.jpg" alt="Shabab Al Bomb" loading="lazy">
+                    <div class="card__overlay"></div>
+                    <div class="card__info">
+                        <p class="card__title">Shabab Al Bomb</p>
+                        <div class="card__meta-row"><span class="card__match">96% Match</span></div>
+                        <p class="card__genres">Comedy · Family</p>
+                    </div>
+                </div>
+
+                <div class="card" onclick="changeMovie('Siwar','2025','2h 0m','94% Match','A Saudi drama inspired by true 2003 events. Two newborns — one Saudi, one Turkish — switched in a Najran hospital.','https://cdn.al-ain.com/lg/images/2025/7/20/205-094545-437490.jpg-2-.jpg')">
+                    <img class="card__thumb" src="https://cdn.al-ain.com/lg/images/2025/7/20/205-094545-437490.jpg-2-.jpg" alt="Siwar" loading="lazy">
+                    <div class="card__overlay"></div>
+                    <div class="card__info">
+                        <p class="card__title">Siwar</p>
+                        <div class="card__meta-row"><span class="card__match">94% Match</span></div>
+                        <p class="card__genres">Drama · Family</p>
+                    </div>
+                </div>
+
+                <div class="card" onclick="changeMovie('Mandoob','2023','2h 2m','91% Match','A delivery driver is pulled into an underworld of secrets and moral dilemmas in Riyadh.','https://i.ytimg.com/vi/kbfEXH6T4vA/maxresdefault.jpg')">
+                    <img class="card__thumb" src="https://i.ytimg.com/vi/kbfEXH6T4vA/maxresdefault.jpg" alt="Mandoob" loading="lazy">
+                    <div class="card__overlay"></div>
+                    <div class="card__info">
+                        <p class="card__title">Mandoob</p>
+                        <div class="card__meta-row"><span class="card__match">91% Match</span></div>
+                        <p class="card__genres">Drama · Thriller</p>
+                    </div>
+                </div>
+
+                <div class="card" onclick="changeMovie('Norah','2023','1h 42m','93% Match','A Saudi girl seeks freedom and self-expression in 1990s rural Saudi Arabia.','https://tse1.mm.bing.net/th/id/OIP.-9ilX7RuwAkUZQdby9I0iAHaK7?rs=1&pid=ImgDetMain&o=7&rm=3')">
+                    <img class="card__thumb" src="https://tse1.mm.bing.net/th/id/OIP.-9ilX7RuwAkUZQdby9I0iAHaK7?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Norah" loading="lazy">
+                    <div class="card__overlay"></div>
+                    <div class="card__info">
+                        <p class="card__title">Norah</p>
+                        <div class="card__meta-row"><span class="card__match">93% Match</span></div>
+                        <p class="card__genres">Drama</p>
+                    </div>
+                </div>
+
+                <div class="card" onclick="changeMovie('Interstellar','2014','2h 49m','95% Match','Traveling beyond this galaxy to discover whether mankind has a future among the stars...','Images/Interstellar.webp')">
+                    <img class="card__thumb" src="Images/Interstellar.webp" alt="Interstellar" loading="lazy">
+                    <div class="card__overlay"></div>
+                    <div class="card__info">
+                        <p class="card__title">Interstellar</p>
+                        <div class="card__meta-row"><span class="card__match">95% Match</span></div>
+                        <p class="card__genres">Sci-Fi · Drama</p>
+                    </div>
+                </div>
+
+                <div class="card" onclick="changeMovie('Joker','2019','2h 2m','92% Match','Arthur Fleck is a man struggling to find his way in Gotham\'s fractured society...','Images/Joker.jpg')">
+                    <img class="card__thumb" src="Images/Joker.jpg" alt="Joker" loading="lazy">
+                    <div class="card__overlay"></div>
+                    <div class="card__info">
+                        <p class="card__title">Joker</p>
+                        <div class="card__meta-row"><span class="card__match">92% Match</span></div>
+                        <p class="card__genres">Drama · Crime</p>
+                    </div>
+                </div>
+
+                <div class="card" onclick="changeMovie('Avengers','2012','2h 23m','96% Match','Earth\'s mightiest heroes must come together to pull the world back from disaster...','Images/Avengers.webp')">
+                    <img class="card__thumb" src="Images/Avengers.webp" alt="Avengers" loading="lazy">
+                    <div class="card__overlay"></div>
+                    <div class="card__info">
+                        <p class="card__title">Avengers</p>
+                        <div class="card__meta-row"><span class="card__match">96% Match</span></div>
+                        <p class="card__genres">Action · Adventure</p>
+                    </div>
+                </div>
+
+                <div class="card" onclick="changeMovie('Titanic','1997','3h 14m','89% Match','The story of a young couple on the ill-fated maiden voyage of the Titanic...','Images/Titanic.webp')">
+                    <img class="card__thumb" src="Images/Titanic.webp" alt="Titanic" loading="lazy">
+                    <div class="card__overlay"></div>
+                    <div class="card__info">
+                        <p class="card__title">Titanic</p>
+                        <div class="card__meta-row"><span class="card__match">89% Match</span></div>
+                        <p class="card__genres">Romance · Drama</p>
+                    </div>
+                </div>
+
+                <div class="card" onclick="changeMovie('Frozen','2013','1h 42m','85% Match','Anna teams up with a mountain man to find her sister Elsa whose powers trapped the kingdom in winter...','Images/Frozen.webp')">
+                    <img class="card__thumb" src="Images/Frozen.webp" alt="Frozen" loading="lazy">
+                    <div class="card__overlay"></div>
+                    <div class="card__info">
+                        <p class="card__title">Frozen</p>
+                        <div class="card__meta-row"><span class="card__match">85% Match</span></div>
+                        <p class="card__genres">Animation · Family</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- My Saved List -->
+        <section id="myListSection" class="content-section" style="display:none;">
+            <div class="section-header">
+                <h2 class="section-title">My Saved <span class="section-title--red">Movies</span></h2>
+            </div>
+            <div id="myListGrid" style="padding: 0 4%; display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px;"></div>
+        </section>
+    </main>
+
+    <!-- ============================================================
+         FOOTER
+    ============================================================ -->
+    <footer class="footer">
+        <div class="footer__top">
+            <div>
+                <div class="footer__logo">MOVIE<span>ZONE</span></div>
+                <p style="font-size:0.82rem;color:var(--text-muted);margin-top:0.6rem;max-width:220px;line-height:1.55;">
+                    Your ultimate destination for movies and TV shows.
+                </p>
+            </div>
+            <div class="footer__columns">
+                <div class="footer__col">
+                    <p class="footer__col-title">Developer Team</p>
+                    <ul>
+                        <li><a href="">Yara Khalid</a></li>
+                        <li><a href="">Aljaze Naje</a></li>
+                        <li><a href="">Hajar Fayz</a></li>
+                        <li><a href="">Amna Saleh</a></li>
+                        <li><a href="">Reem Bader</a></li>
+                        <li><a href="">Sarah Mesfer</a></li>
+                    </ul>
+                </div>
+                <div class="footer__col">
+                    <p class="footer__col-title">Genres</p>
+                    <ul>
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Drama</a></li>
+                        <li><a href="#">Sci-Fi</a></li>
+                        <li><a href="#">Animation</a></li>
+                        <li><a href="#">Romance</a></li>
+                    </ul>
+                </div>
+                <div class="footer__col">
+                    <p class="footer__col-title">Support</p>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Account</a></li>
+                        <li><a href="#">Privacy</a></li>
+                        <li><a href="#">Terms</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer__bottom">
+            <p class="footer__copy">&copy; 2026 MovieZone. All rights reserved — YARSHA</p>
+            <select class="footer__lang-select">
+                <option value="en">🌐 English</option>
+            </select>
+        </div>
+    </footer>
+
+    <!-- ============================================================
+         TOAST CONTAINER
+    ============================================================ -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="moviezone.js"></script>
     <script>
+        'use strict';
+
         let mySavedList = JSON.parse(localStorage.getItem('myFinalList')) || [];
         let currentActive = { title: 'Inception', img: 'Images/Inception.webp' };
 
         function changeMovie(title, year, dur, match, desc, img) {
             currentActive = { title, img };
-            document.getElementById('mainTitle').innerText = title;
-            document.getElementById('mainYear').innerText = year;
+            document.getElementById('mainTitle').innerText   = title;
+            document.getElementById('mainYear').innerText    = year;
             document.getElementById('mainDuration').innerText = dur;
-            document.getElementById('mainMatch').innerText = match;
-            document.getElementById('mainDesc').innerText = desc;
-            document.getElementById('hero').style.backgroundImage = `url('${img}')`;
+            document.getElementById('mainMatch').innerText   = match;
+            document.getElementById('mainDesc').innerText    = desc;
+            document.getElementById('heroBackdrop').style.backgroundImage = `url('${img}')`;
             updateBtn();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function toggleMyList() {
             const idx = mySavedList.findIndex(m => m.title === currentActive.title);
             if (idx === -1) {
                 mySavedList.push(currentActive);
+                showToast(`"${currentActive.title}" added to My List`, 'success');
             } else {
                 mySavedList.splice(idx, 1);
+                showToast(`"${currentActive.title}" removed from My List`, 'info');
             }
             localStorage.setItem('myFinalList', JSON.stringify(mySavedList));
             updateBtn();
@@ -264,85 +271,52 @@
         }
 
         function updateBtn() {
-            const btn = document.getElementById('listBtn');
+            const btn    = document.getElementById('listBtn');
             const exists = mySavedList.some(m => m.title === currentActive.title);
+            const icon   = btn.querySelector('i');
             if (exists) {
-                btn.innerText = "✓ In My List";
-                btn.classList.add('added');
+                icon.className = 'fa-solid fa-check';
+                btn.style.borderColor = '#46d369';
+                btn.style.color       = '#46d369';
             } else {
-                btn.innerText = "+ My List";
-                btn.classList.remove('added');
+                icon.className = 'fa-solid fa-plus';
+                btn.style.borderColor = '';
+                btn.style.color       = '';
             }
         }
 
         function renderGallery() {
             const section = document.getElementById('myListSection');
-            const grid = document.getElementById('myListGrid');
+            const grid    = document.getElementById('myListGrid');
             if (mySavedList.length > 0) {
-                section.classList.add('active');
+                section.style.display = 'block';
                 grid.innerHTML = mySavedList.map(m => `
-                    <div class="movie-card">
-                        <img src="${m.img}" alt="${m.title}">
-                    </div>
-                `).join('');
+                    <div class="card" onclick="changeMovie('${m.title}','','','','','${m.img}')">
+                        <img class="card__thumb" src="${m.img}" alt="${m.title}">
+                        <div class="card__overlay"></div>
+                        <div class="card__info">
+                            <p class="card__title">${m.title}</p>
+                        </div>
+                    </div>`).join('');
             } else {
-                section.classList.remove('active');
+                section.style.display = 'none';
             }
+        }
+
+        function showToast(msg, type) {
+            const tc    = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = `toast${type ? ' toast--' + type : ''}`;
+            toast.textContent = msg;
+            tc.appendChild(toast);
+            setTimeout(() => toast.remove(), 3200);
         }
 
         window.onload = () => {
             renderGallery();
             updateBtn();
+            if (typeof initNavbar === 'function') initNavbar();
         };
     </script>
-     <footer class="footer">
-    <div class="footer__top">
-      <div>
-        <div class="footer__logo">MOVIE<span>ZONE</span></div>
-        <p style="font-size:0.82rem;color:var(--text-muted);margin-top:0.6rem;max-width:220px;line-height:1.55;">
-          Your ultimate destination for movies and TV shows.
-        </p>
-      </div>
-      <div class="footer__columns">
-        <div class="footer__col">
-          <p class="footer__col-title">Developer Team</p>
-          <ul>
-            <li><a href="">Yara Khalid</a></li>
-            <li><a href="">Aljaze Naje</a></li>
-            <li><a href="">Hajar Fayz</a></li>
-            <li><a href="">Amna Saleh</a></li>
-            <li><a href="">Reem Bader</a></li>
-            <li><a href="">Sarah Mesfer</a></li>
-          </ul>
-        </div>
-        <div class="footer__col">
-          <p class="footer__col-title">Genres</p>
-          <ul>
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Drama</a></li>
-            <li><a href="#">Sci-Fi</a></li>
-            <li><a href="#">Animation</a></li>
-            <li><a href="#">Romance</a></li>
-          </ul>
-        </div>
-        <div class="footer__col">
-          <p class="footer__col-title">Support</p>
-          <ul>
-            <li><a href="#">Help Center</a></li>
-            <li><a href="#">Account</a></li>
-            <li><a href="#">Privacy</a></li>
-            <li><a href="#">Terms</a></li>
-            <li><a href="#">Contact Us</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="footer__bottom">
-      <p class="footer__copy">&copy; 2026 MovieZone. All rights reserved — YARSHA</p>
-      <select class="footer__lang-select">
-        <option value="en">🌐 English</option>
-      </select>
-    </div>
-  </footer>
 </body>
 </html>
