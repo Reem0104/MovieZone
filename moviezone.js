@@ -37,7 +37,7 @@ const movies = [
   {
     id: "1",
     title: "Inception",
-    thumb: "images/Inception.webp",
+    thumb: "Images/Inception.webp",
     genres: ["Action", "Sci-Fi"],
     year: "2010",
     duration: "2h 28m",
@@ -46,7 +46,7 @@ const movies = [
   {
     id: "2",
     title: "Interstellar",
-    thumb: "images/Interstellar.webp",
+    thumb: "Images/Interstellar.webp",
     genres: ["Sci-Fi", "Drama"],
     year: "2014",
     duration: "2h 49m",
@@ -55,7 +55,7 @@ const movies = [
   {
     id: "3",
     title: "Frozen",
-    thumb: "images/Frozen.webp",
+    thumb: "Images/Frozen.webp",
     genres: ["Animation", "Family"],
     year: "2013",
     duration: "1h 42m",
@@ -64,7 +64,7 @@ const movies = [
   {
     id: "4",
     title: "Joker",
-    thumb: "images/Joker.jpg",
+    thumb: "Images/Joker.jpg",
     genres: ["Drama", "Crime"],
     year: "2019",
     duration: "2h 2m",
@@ -73,7 +73,7 @@ const movies = [
   {
     id: "5",
     title: "Avengers",
-    thumb: "images/Avengers.webp",
+    thumb: "Images/Avengers.webp",
     genres: ["Action", "Adventure"],
     year: "2012",
     duration: "2h 23m",
@@ -82,7 +82,7 @@ const movies = [
   {
     id: "6",
     title: "Titanic",
-    thumb: "images/Titanic.webp",
+    thumb: "Images/Titanic.webp",
     genres: ["Romance", "Drama"],
     year: "1997",
     duration: "3h 14m",
