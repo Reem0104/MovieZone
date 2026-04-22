@@ -33,61 +33,40 @@ function initNavbar() {
 /* =========================================
    MOVIE DATA (WITH LOCAL IMAGES)
 ========================================= */
-const movies = [
-  {
-    id: "1",
-    title: "Inception",
-    thumb: "Images/Inception.webp",
-    genres: ["Action", "Sci-Fi"],
-    year: "2010",
-    duration: "2h 28m",
-    match: "95%"
-  },
-  {
-    id: "2",
-    title: "Interstellar",
-    thumb: "Images/Interstellar.webp",
-    genres: ["Sci-Fi", "Drama"],
-    year: "2014",
-    duration: "2h 49m",
-    match: "97%"
-  },
-  {
-    id: "3",
-    title: "Frozen",
-    thumb: "Images/Frozen.webp",
-    genres: ["Animation", "Family"],
-    year: "2013",
-    duration: "1h 42m",
-    match: "90%"
-  },
-  {
-    id: "4",
-    title: "Joker",
-    thumb: "Images/Joker.jpg",
-    genres: ["Drama", "Crime"],
-    year: "2019",
-    duration: "2h 2m",
-    match: "91%"
-  },
-  {
-    id: "5",
-    title: "Avengers",
-    thumb: "Images/Avengers.webp",
-    genres: ["Action", "Adventure"],
-    year: "2012",
-    duration: "2h 23m",
-    match: "94%"
-  },
-  {
-    id: "6",
-    title: "Titanic",
-    thumb: "Images/Titanic.webp",
-    genres: ["Romance", "Drama"],
-    year: "1997",
-    duration: "3h 14m",
-    match: "89%"
-  }
+const allMovies = [
+  { id:"ar1", title:"Shabab Al Bomb", thumb:"https://assets.voxcinemas.com/posters/P_HO00011012.jpg", genres:["Comedy","Family"], year:"2026", duration:"1h 55m", match:"96%" },
+
+  { id:"m8", title:"Siwar", thumb:"https://cdn.al-ain.com/lg/images/2025/7/20/205-094545-437490.jpg-2-.jpg", genres:["Drama","Family"], year:"2025", duration:"2h 0m", match:"94%" },
+
+  { id:"ar3", title:"Mandoob", thumb:"https://i.ytimg.com/vi/kbfEXH6T4vA/maxresdefault.jpg", genres:["Drama","Thriller"], year:"2023", duration:"2h 2m", match:"91%" },
+
+  { id:"ar2", title:"Norah", thumb:"https://tse1.mm.bing.net/th/id/OIP.-9ilX7RuwAkUZQdby9I0iAHaK7?rs=1&pid=ImgDetMain&o=7&rm=3", genres:["Drama"], year:"2023", duration:"1h 42m", match:"93%" },
+
+  { id:"m1", title:"Dune: Part Two", thumb:"https://image.tmdb.org/t/p/w500/1pdfLvkbY9ohJlCjQH2CZjjYVvJ.jpg", genres:["Sci-Fi","Adventure"], year:"2024", duration:"2h 46m", match:"97%" },
+
+  { id:"m2", title:"Oppenheimer", thumb:"https://image.tmdb.org/t/p/w500/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg", genres:["Drama","History"], year:"2023", duration:"3h 0m", match:"98%" },
+
+  { id:"m3", title:"Deadpool & Wolverine", thumb:"https://image.tmdb.org/t/p/w500/8cdWjvZQUExUUTzyp4t6EDMubfO.jpg", genres:["Action","Comedy"], year:"2024", duration:"2h 8m", match:"95%" },
+
+  { id:"m4", title:"Gladiator II", thumb:"https://image.tmdb.org/t/p/w500/2cxhvwyEwRlysAmRH4iodkvo0z5.jpg", genres:["Action","Drama"], year:"2024", duration:"2h 28m", match:"93%" },
+
+  { id:"m5", title:"Alien: Romulus", thumb:"https://image.tmdb.org/t/p/w500/b33nnKl1GSFbao4l3fZDDqsMx0F.jpg", genres:["Horror","Sci-Fi"], year:"2024", duration:"1h 59m", match:"91%" },
+
+  { id:"m6", title:"Inside Out 2", thumb:"https://image.tmdb.org/t/p/w500/vpnVM9B6NMmQpWeZvzLvDESb2QY.jpg", genres:["Animation","Family"], year:"2024", duration:"1h 40m", match:"96%" },
+
+  { id:"m7", title:"Planet of the Apes", thumb:"https://image.tmdb.org/t/p/w500/gKkl37BQuKTanygYQG1pyYgLVgf.jpg", genres:["Sci-Fi","Action"], year:"2024", duration:"2h 25m", match:"92%" },
+
+  { id:"m14", title:"The Dark Knight", thumb:"https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg", genres:["Action","Crime"], year:"2008", duration:"2h 32m", match:"99%" },
+
+  { id:"m15", title:"Avengers: Endgame", thumb:"https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg", genres:["Action","Adventure"], year:"2019", duration:"3h 2m", match:"96%" },
+
+  { id:"m17", title:"The Wild Robot", thumb:"https://image.tmdb.org/t/p/w500/wTnV3PCVW5O92JMrFvvrRcV39RU.jpg", genres:["Animation","Family"], year:"2024", duration:"1h 41m", match:"97%" },
+
+  { id:"m18", title:"Moana 2", thumb:"https://image.tmdb.org/t/p/w500/aLVkiINlIeCkcZIzb7XHzPYgO6L.jpg", genres:["Animation","Adventure"], year:"2024", duration:"1h 40m", match:"89%" },
+
+  { id:"m19", title:"Kung Fu Panda 4", thumb:"https://image.tmdb.org/t/p/w500/kDp1vUBnMpe8ak4rjgl3cLELqjU.jpg", genres:["Animation","Action"], year:"2024", duration:"1h 34m", match:"88%" },
+
+  { id:"m20", title:"A Quiet Place: Day One", thumb:"https://image.tmdb.org/t/p/w500/yrpPYKijwdMHyTGIOd1iK1h0Xno.jpg", genres:["Horror","Thriller"], year:"2024", duration:"1h 39m", match:"90%" }
 ];
 
 
@@ -134,7 +113,7 @@ function initSearch() {
     }
 
     // Filter movies
-    const filtered = movies.filter(movie =>
+    const filtered = allMovies.filter(movie =>
       movie.title.toLowerCase().includes(query)
     );
 
