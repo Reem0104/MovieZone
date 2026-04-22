@@ -33,7 +33,7 @@ function initNavbar() {
 /* =========================================
    MOVIE DATA (WITH LOCAL IMAGES)
 ========================================= */
-const allMovies = [
+const movies = [
   { id:"ar1", title:"Shabab Al Bomb", thumb:"https://assets.voxcinemas.com/posters/P_HO00011012.jpg", genres:["Comedy","Family"], year:"2026", duration:"1h 55m", match:"96%" },
 
   { id:"m8", title:"Siwar", thumb:"https://cdn.al-ain.com/lg/images/2025/7/20/205-094545-437490.jpg-2-.jpg", genres:["Drama","Family"], year:"2025", duration:"2h 0m", match:"94%" },
@@ -68,6 +68,7 @@ const allMovies = [
 
   { id:"m20", title:"A Quiet Place: Day One", thumb:"https://image.tmdb.org/t/p/w500/yrpPYKijwdMHyTGIOd1iK1h0Xno.jpg", genres:["Horror","Thriller"], year:"2024", duration:"1h 39m", match:"90%" }
 ];
+
 
 
 /* =========================================
@@ -113,7 +114,7 @@ function initSearch() {
     }
 
     // Filter movies
-    const filtered = allMovies.filter(movie =>
+    const filtered = movies.filter(movie =>
       movie.title.toLowerCase().includes(query)
     );
 
